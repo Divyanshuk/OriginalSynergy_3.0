@@ -65,7 +65,7 @@ public class LocationPhoto extends AppCompatActivity {
         setContentView(R.layout.activity_location_photo);
 
 
-        ProgressDialog progressDialog = new ProgressDialog(LocationPhoto.this);
+       // ProgressDialog progressDialog = new ProgressDialog(LocationPhoto.this);
 
         fileno = getIntent().getStringExtra("file");
         agentid = getIntent().getStringExtra("agent");
