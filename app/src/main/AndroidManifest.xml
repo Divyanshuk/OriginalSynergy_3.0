@@ -7,8 +7,12 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
-    <uses-feature android:name="android.hardware.camera2" android:required="true"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +32,8 @@
         <activity android:name=".Residence" />
         <activity android:name=".Business" />
         <activity android:name=".Office" />
-        <activity android:name=".AssignmentChoose"></activity>
+        <activity android:name=".AssignmentChoose" />
+        <activity android:name=".LocationPhoto"></activity>
     </application>
 
 </manifest>
