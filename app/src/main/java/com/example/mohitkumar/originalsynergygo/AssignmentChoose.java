@@ -11,8 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class AssignmentChoose extends AppCompatActivity {
 
@@ -21,7 +29,7 @@ public class AssignmentChoose extends AppCompatActivity {
     RecyclerView.Adapter adapter;
     RecyclerView recyclerView;
     ArrayList<String> fi = new ArrayList<String>();
-    ArrayList<CardData> list = new ArrayList<CardData>();
+    ArrayList<CardDetails> list = new ArrayList<CardDetails>();
     public static final int EXTERNAL_STORAGE_CODE = 101;
 
 
@@ -42,11 +50,14 @@ public class AssignmentChoose extends AppCompatActivity {
             progressDialog.show();
             progressDialog.setCancelable(true);
 
-//        layoutManager = new LinearLayoutManager(getApplicationContext());
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setHasFixedSize(true);
-//        adapter = new RecyclerCardAdapter(getApplicationContext(), list);
-//        recyclerView.setAdapter(adapter);
+
+            layoutManager = new LinearLayoutManager(AssignmentChoose.this);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setHasFixedSize(true);
+            BackgroundTask backGroundTask = new BackgroundTask(AssignmentChoose.this);
+            list = backGroundTask.getList();
+            adapter = new RecyclerCardAdapter(AssignmentChoose.this,list);
+            recyclerView.setAdapter(adapter);
 
 
             progressDialog.dismiss();

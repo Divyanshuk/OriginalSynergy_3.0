@@ -7,6 +7,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.Map;
 
 public class Office extends AppCompatActivity {
 
@@ -154,6 +163,26 @@ public class Office extends AppCompatActivity {
         scompanyNature=companyNature.getText().toString().trim();
         sremarks=remarks.getText().toString().trim();
         sdetsalary = detsalary.getText().toString().trim();
+
+        String server_url = "";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+               // progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),"No connection",Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return super.getParams();
+
+            }
+        };
     }
 
 }

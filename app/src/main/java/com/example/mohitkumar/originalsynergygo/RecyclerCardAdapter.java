@@ -18,9 +18,9 @@ import java.util.ArrayList;
 public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapter.RecycViewHolder>{
 
     Context context;
-    ArrayList<CardData> arrayList = new ArrayList<CardData>();
+    ArrayList<CardDetails> arrayList = new ArrayList<CardDetails>();
 
-    public RecyclerCardAdapter(Context context, ArrayList<CardData> arrayList){
+    public RecyclerCardAdapter(Context context, ArrayList<CardDetails> arrayList){
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -34,7 +34,7 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
 
     @Override
     public void onBindViewHolder(RecycViewHolder holder, int position) {
-        CardData cardData = arrayList.get(position);
+        CardDetails cardDetails = arrayList.get(position);
 
         Typeface tf = Typeface.createFromAsset(context.getAssets(),"fonts/OpenSans-Semibold.ttf");
 
@@ -49,15 +49,15 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
         holder.textView9.setTypeface(tf);
 
 
-        holder.textView1.setText(cardData.getName());
-        holder.textView2.setText(cardData.getFile());
-        holder.textView3.setText(cardData.getAddtype());
-        holder.textView4.setText(cardData.getAddress());
-        holder.textView5.setText(cardData.getLandmark());
-        holder.textView6.setText(cardData.getPcontact());
-        holder.textView7.setText(cardData.getScontact());
-        holder.textView8.setText(cardData.getAgentid());
-        holder.textView9.setText(cardData.getUniid());
+        holder.textView1.setText(cardDetails.getName());
+        holder.textView2.setText(cardDetails.);
+        holder.textView3.setText(cardDetails.getType());
+        holder.textView4.setText(cardDetails.getAddress());
+        holder.textView5.setText(cardDetails.getApplorco());
+        holder.textView6.setText(cardDetails.getMobile());
+       // holder.textView7.setText(cardDetails.);
+        holder.textView8.setText(cardDetails.getFos());
+       // holder.textView9.setText(cardDetails.getUniid());
     }
 
 

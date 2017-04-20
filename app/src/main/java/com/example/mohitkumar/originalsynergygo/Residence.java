@@ -7,6 +7,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.Map;
 
 public class Residence extends AppCompatActivity {
 
@@ -17,7 +26,7 @@ public class Residence extends AppCompatActivity {
     ArrayAdapter<CharSequence> maritaladapter;
     ArrayAdapter<CharSequence> localityadapter;
 
-    String sregistration,scarpetArea,spoliticalInflu,sotherRemarks,svehicle;
+    String sregistration,scarpetArea,spoliticalInflu,sotherRemarks,svehicle,srelapp,smob,snoyears,sdoba,seduqual;
     Spinner vehicle;
     String filestr,agentid;
     ArrayAdapter<CharSequence> vehicleadapter;
@@ -196,6 +205,50 @@ public class Residence extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    public void onClicknextsr1(View view) {
+
+        sname = name.getText().toString();
+        snoFamilyMem = noFamilyMem.getText().toString();
+        sworkingMem = workingMem.getText().toString();
+        sdependMem = dependMem.getText().toString();
+        schildren = children.getText().toString();
+        sspouseEmp = spouseEmp.getText().toString();
+        sresidence = residence.getSelectedItem().toString();
+        smaritalStatus = maritalStatus.getSelectedItem().toString();
+        slocality = locality.getSelectedItem().toString();
+        sregistration = registration.getText().toString();
+        scarpetArea = carpetArea.getText().toString();
+        spoliticalInflu = politicalInflu.getText().toString();
+        sotherRemarks = otherRemarks.getText().toString();
+        svehicle = vehicle.getSelectedItem().toString();
+        srelapp = relapp.getText().toString();
+        smob = mob.getText().toString();
+        snoyears = noyears.getText().toString();
+        sdoba = doba.getText().toString();
+        seduqual = eduqual.getText().toString();
+
+        String server_url = "";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+               // progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),"No connection",Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return super.getParams();
+
+            }
+        };
 
     }
 }

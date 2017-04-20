@@ -66,4 +66,39 @@
         <item>Others</item>
     </string-array>
 
+    <string-array name="name_board">
+        <item>YES</item>
+        <item>NO</item>
+    </string-array>
+    <string-array name="ambience">
+        <item>AVERAGE</item>
+        <item>GOOD</item>
+        <item>POOR</item>
+    </string-array>
+    <string-array name="visitingcard">
+        <item>YES</item>
+        <item>NO</item>
+    </string-array>
+    <string-array name="exteriors">
+        <item>AVERAGE</item>
+        <item>GOOD</item>
+        <item>POOR</item>
+    </string-array>
+    <string-array name="easy_locate">
+        <item>EASY</item>
+        <item>DIFFICULT</item>
+    </string-array>
+    <string-array name="business_Act">
+        <item>HIGH</item>
+        <item>MEDIUM</item>
+        <item>LOW</item>
+    </string-array>
+    <string-array name="aff_pol_party">
+        <item>YES</item>
+        <item>NO</item>
+    </string-array>
+    <string-array name="emp_sighted">
+        <item>YES</item>
+        <item>NO</item>
+    </string-array>
 </resources>
