@@ -43,7 +43,7 @@ public class Requesthandler {
                                   HashMap<String, String> postDataParams) {
 
         URL url;
-        String response = "";
+        String response = "http://139.59.5.200/repignite/android/imageupload.php";
         try {
             url = new URL(requestURL);
 

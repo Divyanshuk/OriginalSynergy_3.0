@@ -351,6 +351,6 @@ public class Business extends AppCompatActivity {
             }
         };
 
-        MySingleton.getmInstance(Business.this).addToRequestQueue(stringRequest);
+        MySingleton.getInstance(Business.this).addToRequestQueue(stringRequest);
     }
 }

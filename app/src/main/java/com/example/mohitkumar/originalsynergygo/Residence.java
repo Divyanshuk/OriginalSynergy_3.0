@@ -278,7 +278,7 @@ public class Residence extends AppCompatActivity {
             }
         };
 
-        MySingleton.getmInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
     }
 }

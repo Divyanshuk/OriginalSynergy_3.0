@@ -5,25 +5,30 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
 
     EditText agentId,pass;
-    String id,passw;
+    String id,passw,tablename;
     public String AgentIDin,PassIn;
     ArrayList<String> list = new ArrayList<String>();
     public static final int EXTERNAL_STORAGE_CODE = 101;
@@ -45,40 +50,59 @@ public class LoginActivity extends AppCompatActivity {
     public void onClickLogin(View view) {
         AgentIDin = agentId.getText().toString();
         PassIn = pass.getText().toString();
-        String server_url = "";
 
-        if(isNetworkAvailable(getApplicationContext())) {
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, server_url, (JSONObject) null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        id = response.getString("USERNAME");
-                        passw = response.getString("PASSWORD");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
+        Log.d("PassIn",PassIn);
 
-                }
-            });
-
-            MySingleton.getmInstance(LoginActivity.this).addToRequestQueue(jsonObjectRequest);
-
-            if (pass.equals(PassIn)) {
-                Intent intent = new Intent(LoginActivity.this, AssignmentChoose.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(getApplicationContext(), "Wrong Details please try again.", Toast.LENGTH_LONG).show();
-            }
+        if (AgentIDin.equals("") || PassIn.equals("")) {
+            Toast.makeText(getApplicationContext(), "Enter the details", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getApplicationContext(),"Check your Network",Toast.LENGTH_LONG).show();
-        }
+            String server_url = "http://139.59.5.200/repignite/android/fetchtable.php";
 
-        Intent intent = new Intent(LoginActivity.this, AssignmentChoose.class);
-        intent.putExtra("Agent",AgentIDin);
-        startActivity(intent);
+            if (isNetworkAvailable(getApplicationContext())) {
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            Log.d("TAG",response);
+                            JSONObject jsonObject = new JSONObject(response);
+                            id = jsonObject.getString("FOSNAME");
+                            passw = jsonObject.getString("FOSPASS");
+                            Log.d("passw",passw);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+
+                        tablename = params.put("tablename","fosdetails");
+
+                        return params;
+                    }
+                };
+
+                MySingleton.getInstance(LoginActivity.this).addToRequestQueue(stringRequest);
+
+             //   if (passw.equals(PassIn)) {
+//                    Intent intent = new Intent(LoginActivity.this, AssignmentChoose.class);
+//                    intent.putExtra("Agent",AgentIDin);
+//                  //  startActivity(intent);
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "Wrong Details please try again.", Toast.LENGTH_LONG).show();
+//                }
+            } else {
+                Toast.makeText(getApplicationContext(), "Check your Network", Toast.LENGTH_LONG).show();
+            }
+
+//        Intent intent = new Intent(LoginActivity.this, AssignmentChoose.class);
+//        startActivity(intent);
+        }
     }
 }

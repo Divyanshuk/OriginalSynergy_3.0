@@ -31,11 +31,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class LocationPhoto extends AppCompatActivity {
 
@@ -52,7 +59,7 @@ public class LocationPhoto extends AppCompatActivity {
     private Uri filepath;
     private int PICK_IMAGE_REQUEST = 1;
 
-    public static final String UPLOAD_URL = "http://";
+    public static final String UPLOAD_URL = "http://139.59.5.200/repignite/android/imageupload.php";
     public static final String UPLOAD_KEY = "image";
     public static final String TAG = "MY MESSAGE";
 
@@ -67,9 +74,9 @@ public class LocationPhoto extends AppCompatActivity {
 
        // ProgressDialog progressDialog = new ProgressDialog(LocationPhoto.this);
 
-        fileno = getIntent().getStringExtra("file");
-        agentid = getIntent().getStringExtra("agent");
-        Type = getIntent().getStringExtra("type");
+     //   fileno = getIntent().getStringExtra("file");
+     //   agentid = getIntent().getStringExtra("agent");
+     //   Type = getIntent().getStringExtra("type");
 
         photo = (FloatingActionButton) findViewById(R.id.pho);
 
@@ -79,6 +86,7 @@ public class LocationPhoto extends AppCompatActivity {
         refresh = (Button) findViewById(R.id.refresh);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
         if (isLocationServicesAvailable(LocationPhoto.this)) {
             dialog = new ProgressDialog(this);
             dialog.setMessage("Getting Your location....");
@@ -234,45 +242,72 @@ public class LocationPhoto extends AppCompatActivity {
     }
 
     private void uploadImage(){
-        class UploadImage extends AsyncTask<Bitmap,Void,String> {
+//        class UploadImage extends AsyncTask<Bitmap,Void,String> {
+//
+//            ProgressDialog loading;
+//            Requesthandler rh = new Requesthandler();
+//
+//            @Override
+//            protected void onPreExecute() {
+//                super.onPreExecute();
+//                loading = ProgressDialog.show(LocationPhoto.this, "Uploading Image", "Please wait...",true,true);
+//            }
+//
+//            @Override
+//            protected void onPostExecute(String s) {
+//                super.onPostExecute(s);
+//                loading.dismiss();
+//                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            protected String doInBackground(Bitmap... params) {
+//                Bitmap bitmap = params[0];
+//                String uploadImage = getStringImage(bitmap);
+//
+//                HashMap<String,String> data = new HashMap<>();
+//                data.put(UPLOAD_KEY, uploadImage);
+//
+//                String result = rh.sendPostRequest(UPLOAD_URL,data);
+//
+//                return result;
+//            }
+//        }
+//
+//        UploadImage ui = new UploadImage();
+//        ui.execute(bitmap);
 
-            ProgressDialog loading;
-            Requesthandler rh = new Requesthandler();
-
+        ProgressDialog progressDialog = new ProgressDialog(LocationPhoto.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle("Uploading Image");
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL, new Response.Listener<String>() {
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                loading = ProgressDialog.show(LocationPhoto.this, "Uploading Image", "Please wait...",true,true);
-            }
+            public void onResponse(String response) {
 
+            }
+        }, new Response.ErrorListener() {
             @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                loading.dismiss();
-                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
-            }
+            public void onErrorResponse(VolleyError error) {
 
+            }
+        }){
             @Override
-            protected String doInBackground(Bitmap... params) {
-                Bitmap bitmap = params[0];
-                String uploadImage = getStringImage(bitmap);
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
 
-                HashMap<String,String> data = new HashMap<>();
-                data.put(UPLOAD_KEY, uploadImage);
+                params.put("NAME","NIKHIL");
+                params.put("IMAGE",getStringImage(bitmap));
 
-                String result = rh.sendPostRequest(UPLOAD_URL,data);
-
-                return result;
+                return params;
             }
-        }
-
-        UploadImage ui = new UploadImage();
-        ui.execute(bitmap);
+        };
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+        progressDialog.dismiss();
     }
 
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bmp.compress(Bitmap.CompressFormat.PNG, 30, baos);
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;

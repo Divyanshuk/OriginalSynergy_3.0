@@ -33,6 +33,35 @@
                 android:layout_marginBottom="30dp"
                 >
                 <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Designation of applicant"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/DesgAppeditText"
+                    android:layout_marginRight="30dp"
+                    android:inputType="textPersonName"
+                    />
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -117,64 +146,6 @@
                     android:id="@+id/mobPCeditText"
                     android:layout_marginRight="30dp"
                     android:inputType="number"
-                    />
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="Date of joining of applicant"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_weight="1"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:textColor="#ee4242"
-                        />
-                </LinearLayout>
-                <EditText
-                    android:inputType="date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/DateAppjoineditText"
-                    android:layout_marginRight="30dp"
-                    />
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="Designation of applicant"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_weight="1"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:textColor="#ee4242"
-                        />
-                </LinearLayout>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/DesgAppeditText"
-                    android:layout_marginRight="30dp"
-                    android:inputType="textPersonName"
                     />
                 <LinearLayout
                     android:layout_marginTop="10dp"
@@ -343,7 +314,27 @@
                     android:layout_marginRight="30dp"
                     android:inputType="textPersonName"
                     />
-
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Designation of the person who verified?"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/desig_ver"
+                    android:layout_marginRight="30dp"
+                    android:inputType="textPersonName"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

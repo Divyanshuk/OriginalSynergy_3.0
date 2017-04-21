@@ -50,15 +50,47 @@ public class BackgroundTask {
             @Override
             public void onResponse(String response) {
                 Log.d("TAG",response.toString());
+                int count = 0;
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    Log.d("Length", String.valueOf(jsonArray.length()));
+                   while(count<jsonArray.length()) {
+                       JSONObject jsonObject = jsonArray.getJSONObject(count);
+                       CardDetails cardDetails = new CardDetails(jsonObject.getString("REFNO"),jsonObject.getString("DOR"),jsonObject.getString("NAME"),jsonObject.getString("ADDR"),jsonObject.getString("MOBILE"),jsonObject.getString("FOS"),
+                              jsonObject.getString("APPLORCO"),jsonObject.getString("TYPE"));
+                           arrayList.add(cardDetails);
+                        count++;
+                        Log.d("TAG 1 ",jsonObject.getString("REFNO"));
+                   }
+                   Log.d("IN HERE","IN HERE");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // progressDialog.dismiss();
                 Toast.makeText(context,"No connection",Toast.LENGTH_LONG).show();
                 error.printStackTrace();
             }
         })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+
+                Log.d("FIRST HERE", name);
+                params.put("fosname", name);
+                return params;
+
+            }
+        };
+        Log.d("String","Returned Arraylist");
+        MySingleton.getInstance(context).addToRequestQueue(stringRequest);
+        return arrayList;
+    }
+}
+
 //         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, json_url, (JSONArray) null, new Response.Listener<JSONArray>() {
 //            @Override
 //            public void onResponse(JSONArray response) {
@@ -83,15 +115,7 @@ public class BackgroundTask {
 //
 //            }
 //        })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String,String>();
 
-                Log.d("FIRST HERE",name);
-                params.put("fosname",name);
-                return params;
-            }
 
 //             @Override
 //             protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
@@ -110,10 +134,3 @@ public class BackgroundTask {
 //                 }
 //
 //             }
-         };
-
-        MySingleton.getmInstance(context).addToRequestQueue(stringRequest);
-//
-        return arrayList;
-    }
-}

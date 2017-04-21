@@ -37,7 +37,7 @@ public class Office extends AppCompatActivity {
         name=(EditText)findViewById(R.id.personconteditText);
         designation=(EditText)findViewById(R.id.desigPCeditText);
         mobile=(EditText)findViewById(R.id.mobPCeditText);
-        joinDate=(EditText)findViewById(R.id.DateAppjoineditText);
+        //joinDate=(EditText)findViewById(R.id.DateAppjoineditText);
         desigApp=(EditText)findViewById(R.id.DesgAppeditText);
         noYears=(EditText)findViewById(R.id.yearseditText);
         companyNature=(EditText)findViewById(R.id.CompanyNatureeditText);
@@ -201,7 +201,7 @@ public class Office extends AppCompatActivity {
             }
         };
 
-        MySingleton.getmInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
 }

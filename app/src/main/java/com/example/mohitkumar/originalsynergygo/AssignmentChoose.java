@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -19,7 +20,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class AssignmentChoose extends AppCompatActivity {
@@ -28,9 +33,11 @@ public class AssignmentChoose extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
     RecyclerView recyclerView;
+    String AgentID;
     ArrayList<String> fi = new ArrayList<String>();
     ArrayList<CardDetails> list = new ArrayList<CardDetails>();
     public static final int EXTERNAL_STORAGE_CODE = 101;
+    String json_url = "http://139.59.5.200/repignite/android/fetchallocations.php";
 
 
     @Override
@@ -39,7 +46,7 @@ public class AssignmentChoose extends AppCompatActivity {
         setContentView(R.layout.activity_assignment_choose);
 
 
-        final String AgentID = getIntent().getStringExtra("Agent");
+        AgentID = getIntent().getStringExtra("Agent");
         getSupportActionBar().setTitle("Agent ID : " + AgentID);
         recyclerView = (RecyclerView)findViewById(R.id.recyc_view);
 
@@ -50,15 +57,56 @@ public class AssignmentChoose extends AppCompatActivity {
             progressDialog.show();
             progressDialog.setCancelable(true);
 
-
             layoutManager = new LinearLayoutManager(AssignmentChoose.this);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setHasFixedSize(true);
-            BackgroundTask backGroundTask = new BackgroundTask(AssignmentChoose.this,AgentID);
-            list = backGroundTask.getList();
-            adapter = new RecyclerCardAdapter(AssignmentChoose.this,list);
-            recyclerView.setAdapter(adapter);
+          //  BackgroundTask backGroundTask = new BackgroundTask(AssignmentChoose.this,AgentID);
 
+            StringRequest stringRequest = new StringRequest(Request.Method.POST,json_url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d("TAG",response.toString());
+                    int count = 0;
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        Log.d("Length", String.valueOf(jsonArray.length()));
+                        while(count<jsonArray.length()) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(count);
+                            CardDetails cardDetails = new CardDetails(jsonObject.getString("REFNO"),jsonObject.getString("DOR"),jsonObject.getString("NAME"),jsonObject.getString("ADDR"),jsonObject.getString("MOBILE"),jsonObject.getString("FOS"),
+                                    jsonObject.getString("APPLORCO"),jsonObject.getString("TYPE"));
+                            list.add(cardDetails);
+                            count++;
+                            Log.d("TAG 1 ",jsonObject.getString("REFNO"));
+                        }
+                        Log.d("IN HERE","IN HERE");
+                        adapter = new RecyclerCardAdapter(AssignmentChoose.this,list);
+                        recyclerView.setAdapter(adapter);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(),"No connection",Toast.LENGTH_LONG).show();
+                    error.printStackTrace();
+                }
+            })
+            {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+
+                    Log.d("FIRST HERE",AgentID);
+                    params.put("fosname",AgentID);
+                    return params;
+
+                }
+            };
+
+            MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+          //  Log.d("list",list.toString());
 
             progressDialog.dismiss();
         } else {
@@ -84,4 +132,54 @@ public class AssignmentChoose extends AppCompatActivity {
         final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
         return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
+
+//    public ArrayList<CardDetails> getList() {
+//        final ArrayList<CardDetails> arrayList = new ArrayList<CardDetails>();
+//        ProgressDialog progressDialog = new ProgressDialog(AssignmentChoose.this);
+//        progressDialog.setTitle("Wait..");
+//        progressDialog.setMessage("Adding you to our network");
+//        progressDialog.show();
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST,json_url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Log.d("TAG",response.toString());
+//                int count = 0;
+//                try {
+//                    JSONArray jsonArray = new JSONArray(response);
+//                    Log.d("Length", String.valueOf(jsonArray.length()));
+//                    while(count<jsonArray.length()) {
+//                        JSONObject jsonObject = jsonArray.getJSONObject(count);
+//                        CardDetails cardDetails = new CardDetails(jsonObject.getString("REFNO"),jsonObject.getString("DOR"),jsonObject.getString("NAME"),jsonObject.getString("ADDR"),jsonObject.getString("MOBILE"),jsonObject.getString("FOS"),
+//                                jsonObject.getString("APPLORCO"),jsonObject.getString("TYPE"));
+//                        arrayList.add(cardDetails);
+//                        count++;
+//                        Log.d("TAG 1 ",jsonObject.getString("REFNO"));
+//                    }
+//                    Log.d("IN HERE","IN HERE");
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(getApplicationContext(),"No connection",Toast.LENGTH_LONG).show();
+//                error.printStackTrace();
+//            }
+//        })
+//        {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//
+//                Log.d("FIRST HERE",AgentID);
+//                params.put("fosname",AgentID);
+//                return params;
+//
+//            }
+//        };
+//        Log.d("String","Returned Arraylist");
+//        return arrayList;
+//    }
 }
