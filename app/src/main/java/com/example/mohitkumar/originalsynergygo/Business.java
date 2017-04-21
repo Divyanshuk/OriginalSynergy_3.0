@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Business extends AppCompatActivity {
@@ -321,9 +322,35 @@ public class Business extends AppCompatActivity {
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                return super.getParams();
+                Map<String,String> params = new HashMap<String,String>();
 
+                params.put("REFNO","");
+                params.put("PERSONMET",sname);
+                params.put("DESIGNAPPL",sdesig);
+                params.put("PERSONDESIGN","");
+                params.put("PERSONPHONE",scontact);
+                params.put("NOOFYEARS",sYearCompany);
+                params.put("VISITCARD",svcard);
+                params.put("ORGNAME","");
+                params.put("ORGNAME",sbussNature);
+                params.put("ORGTYPE", stypeCompany);
+                params.put("NOOFEMPL",snoEmployee);
+                params.put("NOOFBRANCH","");
+                params.put("BOOLBOARD",snameboard);
+                params.put("AMBIENCE",sambience);
+                params.put("EXTERIOR",sexterior);
+                params.put("VERIFFROM",sverified);
+                params.put("EASELOCATE",slocate);
+                params.put("ORGACTIVITY",sbact);
+                params.put("POLPARTYAFFL",spolaffl);
+                params.put("REMARKS","");
+                params.put("SEENNOOFEMPL",sempsighted);
+                params.put("REMARKS","");
+
+                return params;
             }
         };
+
+        MySingleton.getmInstance(Business.this).addToRequestQueue(stringRequest);
     }
 }

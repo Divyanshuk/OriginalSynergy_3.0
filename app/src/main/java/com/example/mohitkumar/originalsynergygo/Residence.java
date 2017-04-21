@@ -15,11 +15,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Residence extends AppCompatActivity {
 
-    EditText name,noFamilyMem,workingMem,dependMem,children,spouseEmp,registration,carpetArea,politicalInflu,otherRemarks,relapp,mob,noyears,doba,eduqual;
+    EditText name,noFamilyMem,workingMem,dependMem,children,spouseEmp,registration,carpetArea,otherRemarks,relapp,mob,noyears,doba,eduqual;
     String sname,snoFamilyMem,sworkingMem,sdependMem,schildren,sspouseEmp,sresidence,smaritalStatus,slocality;
     Spinner residence,maritalStatus,locality,resambience,ncheck,clientcoop;
     ArrayAdapter<CharSequence> residenceadapter;
@@ -49,7 +50,7 @@ public class Residence extends AppCompatActivity {
         locality=(Spinner) findViewById(R.id.Localityspinner);
         registration= (EditText)findViewById(R.id.RegNoeditText);
         carpetArea= (EditText)findViewById(R.id.CarpetAreaeditText);
-        politicalInflu= (EditText)findViewById(R.id.PoliticaleditText);
+        //politicalInflu= (EditText)findViewById(R.id.PoliticaleditText);
         otherRemarks= (EditText)findViewById(R.id.OtherRemarkseditText);
         vehicle=(Spinner) findViewById(R.id.Vehiclespinner);
         resambience = (Spinner) findViewById(R.id.res_ambience);
@@ -221,7 +222,7 @@ public class Residence extends AppCompatActivity {
         slocality = locality.getSelectedItem().toString();
         sregistration = registration.getText().toString();
         scarpetArea = carpetArea.getText().toString();
-        spoliticalInflu = politicalInflu.getText().toString();
+        //spoliticalInflu = politicalInflu.getText().toString();
         sotherRemarks = otherRemarks.getText().toString();
         svehicle = vehicle.getSelectedItem().toString();
         srelapp = relapp.getText().toString();
@@ -245,10 +246,39 @@ public class Residence extends AppCompatActivity {
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                return super.getParams();
+                Map<String,String> params = new HashMap<String,String>();
 
+                params.put("REFNO","");
+                params.put("PERSONMET",sname);
+                params.put("RELATIOAPPL",srelapp);
+                params.put("PERSONPHONE",smob);
+                params.put("NOOFYEARS",snoyears);
+                params.put("DOBAPPL",sdoba);
+                params.put("EDUQUAL",seduqual);
+                params.put("RESISTATUS",sresidence);
+                params.put("MARITALSTATUS",smaritalStatus);
+                params.put("NOOFFAMILY",snoFamilyMem);
+                params.put("WORKING",sworkingMem);
+                params.put("ADULTSDEP",sdependMem);
+                params.put("CHILDDEP",schildren);
+                params.put("SPOUSEWORK","");
+                params.put("SPOUSEEMP",sspouseEmp);
+                params.put("COOPERATIVE","");
+                params.put("NEIGHBOURHOOD","");
+                params.put("LOCALITY",slocality);
+                params.put("AMBIENCE","");
+                params.put("CARPETAREA",scarpetArea);
+                params.put("NAPPLSTAY","");
+                params.put("NNOOFFAMILY","");
+                params.put("WHEELER2",svehicle);
+                params.put("WHEELER4","");
+                params.put("REMARKS",sotherRemarks);
+
+                return params;
             }
         };
+
+        MySingleton.getmInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
     }
 }

@@ -54,7 +54,7 @@ public class AssignmentChoose extends AppCompatActivity {
             layoutManager = new LinearLayoutManager(AssignmentChoose.this);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setHasFixedSize(true);
-            BackgroundTask backGroundTask = new BackgroundTask(AssignmentChoose.this);
+            BackgroundTask backGroundTask = new BackgroundTask(AssignmentChoose.this,AgentID);
             list = backGroundTask.getList();
             adapter = new RecyclerCardAdapter(AssignmentChoose.this,list);
             recyclerView.setAdapter(adapter);

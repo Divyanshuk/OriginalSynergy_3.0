@@ -46,28 +46,39 @@ public class LoginActivity extends AppCompatActivity {
         AgentIDin = agentId.getText().toString();
         PassIn = pass.getText().toString();
         String server_url = "";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, server_url,(JSONObject)null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    id = response.getString("USERNAME");
-                    passw = response.getString("PASSWORD");
-                } catch (JSONException e) {
-                    e.printStackTrace();
+
+        if(isNetworkAvailable(getApplicationContext())) {
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, server_url, (JSONObject) null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        id = response.getString("USERNAME");
+                        passw = response.getString("PASSWORD");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-            }
-        });
+                }
+            });
 
-        if(pass.equals(PassIn)) {
-            Intent intent = new Intent(LoginActivity.this,AssignmentChoose.class);
-            startActivity(intent);
+            MySingleton.getmInstance(LoginActivity.this).addToRequestQueue(jsonObjectRequest);
+
+            if (pass.equals(PassIn)) {
+                Intent intent = new Intent(LoginActivity.this, AssignmentChoose.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), "Wrong Details please try again.", Toast.LENGTH_LONG).show();
+            }
         } else {
-            Toast.makeText(getApplicationContext(),"Wrong Details please try again.",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Check your Network",Toast.LENGTH_LONG).show();
         }
+
+        Intent intent = new Intent(LoginActivity.this, AssignmentChoose.class);
+        intent.putExtra("Agent",AgentIDin);
+        startActivity(intent);
     }
 }

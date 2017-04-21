@@ -50,7 +50,7 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
 
 
         holder.textView1.setText(cardDetails.getName());
-        holder.textView2.setText(cardDetails.);
+        holder.textView2.setText(cardDetails.getRefno());
         holder.textView3.setText(cardDetails.getType());
         holder.textView4.setText(cardDetails.getAddress());
         holder.textView5.setText(cardDetails.getApplorco());
@@ -70,10 +70,10 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
 
         TextView textView1,textView2,textView3,textView4,textView5,textView6,textView7,textView8,textView9;
         Context context;
-        ArrayList<CardData> data = new ArrayList<CardData>();
+        ArrayList<CardDetails> data = new ArrayList<CardDetails>();
         String s;
 
-        public RecycViewHolder(View itemView, Context context, ArrayList<CardData> data) {
+        public RecycViewHolder(View itemView, Context context, ArrayList<CardDetails> data) {
             super(itemView);
             this.data = data;
             this.context = context;
@@ -84,9 +84,9 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
             textView4 = (TextView) itemView.findViewById(R.id.address);
             textView5 = (TextView) itemView.findViewById(R.id.land_mark);
             textView6 = (TextView) itemView.findViewById(R.id.p_contact);
-            textView7 = (TextView) itemView.findViewById(R.id.s_contact);
+          //  textView7 = (TextView) itemView.findViewById(R.id.s_contact);
             textView8 = (TextView)itemView.findViewById(R.id.age);
-            textView9 = (TextView)itemView.findViewById(R.id.uniid);
+          //  textView9 = (TextView)itemView.findViewById(R.id.uniid);
 
             itemView.setOnClickListener(this);
         }
@@ -103,9 +103,9 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
                 intent.putExtra("address", textView4.getText().toString());
                 intent.putExtra("landmark", textView5.getText().toString());
                 intent.putExtra("pcontact", textView6.getText().toString());
-                intent.putExtra("scontact", textView7.getText().toString());
+              //  intent.putExtra("scontact", textView7.getText().toString());
                 intent.putExtra("agent", textView8.getText().toString());
-                intent.putExtra("uniid", textView9.getText().toString().trim());
+              //  intent.putExtra("uniid", textView9.getText().toString().trim());
                 Log.d("AgentAdap", textView8.getText().toString());
                 Log.d("UniqueAdap", textView9.getText().toString());
                 context.startActivity(intent);
@@ -118,13 +118,13 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
                 intent.putExtra("address", textView4.getText().toString());
                 intent.putExtra("landmark", textView5.getText().toString());
                 intent.putExtra("pcontact", textView6.getText().toString());
-                intent.putExtra("scontact", textView7.getText().toString());
+             //   intent.putExtra("scontact", textView7.getText().toString());
                 intent.putExtra("agent", textView8.getText().toString());
-                intent.putExtra("uniid", textView9.getText().toString().trim());
+             //   intent.putExtra("uniid", textView9.getText().toString().trim());
                 Log.d("AgentAdap", textView8.getText().toString());
                 Log.d("UniqueAdap", textView9.getText().toString());
                 context.startActivity(intent);
-            } else if(textView3.getText().toString().equals(" BUSINESS")) {
+            } else if(textView3.getText().toString().equals("BUSINESS")) {
                 Intent intent = new Intent(this.context, Business.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("name", textView1.getText().toString());
@@ -134,8 +134,8 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
                 intent.putExtra("landmark", textView5.getText().toString());
                 intent.putExtra("pcontact", textView6.getText().toString());
                 intent.putExtra("scontact", textView7.getText().toString());
-                intent.putExtra("agent", textView8.getText().toString());
-                intent.putExtra("uniid", textView9.getText().toString().trim());
+             //   intent.putExtra("agent", textView8.getText().toString());
+             //   intent.putExtra("uniid", textView9.getText().toString().trim());
                 Log.d("AgentAdap", textView8.getText().toString());
                 Log.d("UniqueAdap", textView9.getText().toString());
                 context.startActivity(intent);

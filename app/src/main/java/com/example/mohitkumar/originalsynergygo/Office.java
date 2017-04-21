@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Office extends AppCompatActivity {
@@ -179,10 +180,28 @@ public class Office extends AppCompatActivity {
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                return super.getParams();
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("REFNO","");
+                params.put("PERSONMET",sname);
+                params.put("DESIGNAPPL",sdesigApp);
+                params.put("PERSONDESIGN",sdesignation);
+                params.put("PERSONPHONE",smobile);
+                params.put("NOOFYEARS",snoYears);
+                params.put("ORGNAME","");
+                params.put("ORGNATURE",scompanyNature);
+                params.put("JOBTYPE",sjobType);
+                params.put("WORKINGAS",sworkOrg);
+                params.put("TRANSFERABLE",sjobTransfer);
+                params.put("SALARYPERSON",sdetsalary);
+                params.put("SALARYDESIGN","");
+                params.put("REMARKS",sremarks);
+
+                return params;
 
             }
         };
+
+        MySingleton.getmInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
 }
