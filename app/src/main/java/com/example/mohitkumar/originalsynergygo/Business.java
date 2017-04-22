@@ -7,6 +7,7 @@ import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +43,7 @@ public class Business extends AppCompatActivity {
         applorcoappl = getIntent().getStringExtra("appl_coappl");
         filestr = getIntent().getExtras().getString("uniid");
 
+        Log.d("TAG",applorcoappl);
 
         name= (EditText)findViewById(R.id.nameeditText);
         nameboard = (Spinner)findViewById(R.id.nameboard);
@@ -302,7 +305,7 @@ public class Business extends AppCompatActivity {
 
         recommadapter = ArrayAdapter.createFromResource(this, R.array.recom_or_not, R.layout.support_simple_spinner_dropdown_item);
         recommadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        recomm.setAdapter(polaffladapter);
+        recomm.setAdapter(recommadapter);
     }
 
     public void onClickNextb1(View view) {
@@ -344,6 +347,7 @@ public class Business extends AppCompatActivity {
         long dt = date.getDate();
         final String date1 = String.valueOf(dt);
 
+        Log.d(time,date1);
         String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
@@ -364,13 +368,13 @@ public class Business extends AppCompatActivity {
 
                 if(applorcoappl.equals("APPLICANT")) {
                     params.put("tablename","appl_business");
-                } else {
+                } else if(applorcoappl.equals("COAPPLICANT")){
                     params.put("tablename","coappl_business");
                 }
 
                 params.put("REFNO",filestr);
-                params.put("DATE",date1);
-                params.put("TIME",time);
+              //  params.put("DATE",date1);
+              //  params.put("TIME",time);
                 params.put("PERSONMET",sname);
                 params.put("DESIGNAPPL",sdesig);
                 params.put("PERSONDESIGN",spdesig);
@@ -400,5 +404,11 @@ public class Business extends AppCompatActivity {
         MySingleton.getInstance(Business.this).addToRequestQueue(stringRequest);
 
         progressDialog.dismiss();
+
+        Intent intent = new Intent(Business.this,LocationPhoto.class);
+        intent.putExtra("REFNO",filestr);
+        intent.putExtra("ADDRESS","BUSINESS");
+        intent.putExtra("APPL",applorcoappl);
+        startActivity(intent);
     }
 }

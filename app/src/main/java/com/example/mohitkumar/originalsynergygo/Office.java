@@ -1,7 +1,9 @@
 package com.example.mohitkumar.originalsynergygo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,6 +37,7 @@ public class Office extends AppCompatActivity {
         setContentView(R.layout.activity_office);
 
         applorcoappl = getIntent().getStringExtra("appl_coappl");
+        Log.d("TAG",applorcoappl);
         filestr = getIntent().getStringExtra("uniid");
         name=(EditText)findViewById(R.id.personconteditText);
         designation=(EditText)findViewById(R.id.desigPCeditText);
@@ -161,11 +164,12 @@ public class Office extends AppCompatActivity {
     }
 
     public void onClickNextso1(View view) {
-        filestr=getIntent().getStringExtra("file");
+        filestr=getIntent().getStringExtra("uniid");
         sname=name.getText().toString().trim();
-        sdesignation=designation.getText().toString().trim();
+        sdesignation=designation.getText().toString();
         smobile=mobile.getText().toString().trim();
-        sjoinDate=joinDate.getText().toString().trim();
+//        sjoinDate=joinDate.getText().toString().trim();
+        sworkOrg = workOrg.getSelectedItem().toString();
         sdesigApp=desigApp.getText().toString().trim();
         snoYears=noYears.getText().toString().trim();
         scompanyNature=companyNature.getText().toString().trim();
@@ -174,7 +178,7 @@ public class Office extends AppCompatActivity {
         final String sorgname = orgname.getText().toString();
         final String recom = recomm.getSelectedItem().toString();
 
-        String server_url = "";
+        String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -184,7 +188,7 @@ public class Office extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                // progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(),"No connection",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
             }
         }){
             @Override
@@ -193,7 +197,7 @@ public class Office extends AppCompatActivity {
 
                 if(applorcoappl.equals("APPLICANT")) {
                     params.put("tablename","appl_employment");
-                } else {
+                } else if(applorcoappl.equals("COAPPLICANT")){
                     params.put("tablename","coappl_employment");
                 }
 
@@ -209,7 +213,7 @@ public class Office extends AppCompatActivity {
                 params.put("WORKINGAS",sworkOrg);
                 params.put("TRANSFERABLE",sjobTransfer);
                 params.put("SALARYPERSON",sdetsalary);
-                params.put("SALARYDESIGN","");
+                params.put("SALARYDESIGN","cool");
                 params.put("RECOMM",recom);
                 params.put("REMARKS",sremarks);
 
@@ -219,6 +223,12 @@ public class Office extends AppCompatActivity {
         };
 
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+        Intent intent = new Intent(Office.this,LocationPhoto.class);
+        intent.putExtra("REFNO",filestr);
+        intent.putExtra("ADDRESS","SERVICE");
+        intent.putExtra("APPL",applorcoappl);
+        startActivity(intent);
     }
 
 }

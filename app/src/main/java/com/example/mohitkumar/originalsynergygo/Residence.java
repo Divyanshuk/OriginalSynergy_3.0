@@ -1,7 +1,9 @@
 package com.example.mohitkumar.originalsynergygo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,10 +25,10 @@ public class Residence extends AppCompatActivity {
 
     EditText name,noFamilyMem,workingMem,dependMem,children,twowheeler,fourwheeler,spouseEmp,registration,carpetArea,otherRemarks,mob,noyears,doba,eduqual;
     String sname,snoFamilyMem,sworkingMem,sdependMem,schildren,sspouseEmp,sresidence,smaritalStatus,slocality,sspousework;
-    Spinner residence,maritalStatus,locality,resambience,ncheck,clientcoop,spousework,addlock,relapp;
+    Spinner residence,maritalStatus,locality,resambience,ncheck,clientcoop,spousework,addlock,relapp,recomm;
     ArrayAdapter<CharSequence> residenceadapter,ambienceadapter;
-    ArrayAdapter<CharSequence> maritaladapter;
-    ArrayAdapter<CharSequence> localityadapter,spouseworkadapter,clientcoopadapter,addlockadapter;
+    ArrayAdapter<CharSequence> maritaladapter,ncheckadapter,recommadapter;
+    ArrayAdapter<CharSequence> localityadapter,spouseworkadapter,clientcoopadapter,addlockadapter,relationadapter;
     LinearLayout linearLayout;
 
     String sregistration,scarpetArea,spoliticalInflu,sotherRemarks,saddlock,srelapp,smob,snoyears,sdoba,seduqual;
@@ -42,6 +44,8 @@ public class Residence extends AppCompatActivity {
 
         applorcoappl = getIntent().getStringExtra("appl_coappl");
         filestr = getIntent().getStringExtra("uniid");
+
+        Log.d("TAG",applorcoappl);
 
         linearLayout = (LinearLayout) findViewById(R.id.lin_s_emp);
         name= (EditText)findViewById(R.id.Personnameet);
@@ -62,6 +66,7 @@ public class Residence extends AppCompatActivity {
         resambience = (Spinner) findViewById(R.id.res_ambience);
         relapp = (Spinner) findViewById(R.id.rel_Appl);
         mob = (EditText) findViewById(R.id.mobno);
+        recomm = (Spinner) findViewById(R.id.recomm);
         noyears = (EditText) findViewById(R.id.noyears);
         doba = (EditText) findViewById(R.id.dobapp);
         addlock = (Spinner) findViewById(R.id.add_check);
@@ -139,6 +144,10 @@ public class Residence extends AppCompatActivity {
         clientcoopadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         clientcoop.setAdapter(clientcoopadapter);
 
+        ncheckadapter=ArrayAdapter.createFromResource(this,R.array.n_check,R.layout.support_simple_spinner_dropdown_item);
+        ncheckadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        ncheck.setAdapter(ncheckadapter);
+
         addlockadapter=ArrayAdapter.createFromResource(this,R.array.transfer,R.layout.support_simple_spinner_dropdown_item);
         addlockadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         addlock.setAdapter(addlockadapter);
@@ -154,11 +163,13 @@ public class Residence extends AppCompatActivity {
                 switch (i) {
                     case 0:
                         sspousework = "YES";
-
+                        spouseEmp.setVisibility(View.VISIBLE);
+                        linearLayout.setVisibility(View.VISIBLE);
                         break;
                     case 1:
                         sspousework = "NO";
                         linearLayout.setVisibility(View.GONE);
+                        spouseEmp.setVisibility(View.GONE);
                 }
 
             }
@@ -173,6 +184,10 @@ public class Residence extends AppCompatActivity {
         ambienceadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         resambience.setAdapter(ambienceadapter);
 
+
+        recommadapter = ArrayAdapter.createFromResource(this, R.array.recom_or_not, R.layout.support_simple_spinner_dropdown_item);
+        recommadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        recomm.setAdapter(recommadapter);
 
         localityadapter=ArrayAdapter.createFromResource(this,R.array.locality,R.layout.support_simple_spinner_dropdown_item);
         localityadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -222,6 +237,10 @@ public class Residence extends AppCompatActivity {
             }
         });
 
+        relationadapter = ArrayAdapter.createFromResource(this,R.array.rel_appl,R.layout.support_simple_spinner_dropdown_item);
+        relationadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        relapp.setAdapter(relationadapter);
+
     }
 
     public void onClicknextsr1(View view) {
@@ -270,7 +289,7 @@ public class Residence extends AppCompatActivity {
 
                 if(applorcoappl.equals("APPLICANT")) {
                     params.put("tablename","appl_residence");
-                } else {
+                } else if(applorcoappl.equals("COAPPLICANT")){
                     params.put("tablename","coappl_residence");
                 }
 
@@ -299,6 +318,7 @@ public class Residence extends AppCompatActivity {
                 params.put("NNOOFFAMILY","");
                 params.put("WHEELER2",stwo);
                 params.put("WHEELER4",sfour);
+
                 params.put("REMARKS",sotherRemarks);
 
                 return params;
@@ -306,6 +326,12 @@ public class Residence extends AppCompatActivity {
         };
 
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+        Intent intent = new Intent(Residence.this,LocationPhoto.class);
+        intent.putExtra("REFNO",filestr);
+        intent.putExtra("ADDRESS","RESIDENCE");
+        intent.putExtra("APPL",applorcoappl);
+        startActivity(intent);
 
     }
 }
