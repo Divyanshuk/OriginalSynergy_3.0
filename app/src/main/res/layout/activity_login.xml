@@ -36,17 +36,17 @@
                 android:textStyle="bold"
                 android:textColor="#234f62"
                 android:layout_marginTop="90dp" />
-            <EditText
+            <Spinner
                 android:padding="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/AgenitIDeditText"
+                android:id="@+id/AgenitIspinner"
                 android:layout_gravity="center"
                 android:fontFamily="monospace"
                 android:inputType="textPersonName"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                android:hint="Agent ID" />
+                />
 
             <TextView
                 android:layout_width="wrap_content"

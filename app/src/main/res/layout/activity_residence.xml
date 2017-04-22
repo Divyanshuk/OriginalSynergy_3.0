@@ -85,13 +85,14 @@
                         android:textColor="#ee4242"
                         />
                 </LinearLayout>
-                <EditText
+                <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/relationmet"
-                    android:inputType="textPersonName"
-                    android:layout_marginRight="30dp"
-                    />
+                    android:id="@+id/rel_Appl"
+                    android:layout_marginRight="50dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    ></Spinner>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -369,10 +370,40 @@
                     android:layout_marginRight="30dp"
                     />
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Spouse Working"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/SpouseWorkSpinner"
+                    >
+                </Spinner>
+                <LinearLayout
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:id="@+id/lin_s_emp"
                     >
                     <TextView
                         android:layout_width="wrap_content"
@@ -434,7 +465,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Vehicle Seen"
+                        android:text="Two wheeler seen"
                         android:textAppearance="?android:textAppearanceLarge"
                         />
                     <TextView
@@ -446,13 +477,42 @@
                         android:textColor="#ee4242"
                         />
                 </LinearLayout>
-                <Spinner
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="50dp"
-                    android:id="@+id/Vehiclespinner"
+                    android:id="@+id/two_wheeler"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
                     >
-                </Spinner>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Four wheeler seen"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/fourwheelerseen"
+                    android:inputType="number"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -510,6 +570,33 @@
                     android:id="@+id/CarpetAreaeditText"
                     android:layout_marginRight="30dp"
                     />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="If address locked "
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/add_check"
+                    ></Spinner>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -623,6 +710,35 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="50dp"
                     android:id="@+id/res_ambience"
+                    >
+                </Spinner>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Recommended or not"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/recomm"
                     >
                 </Spinner>
                 <LinearLayout

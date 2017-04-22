@@ -178,6 +178,35 @@
                     android:inputType="number"
                     />
                 <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Name of business company"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/namebusiness"
+                    android:layout_marginRight="30dp"
+                    android:inputType="number"
+                    />
+                <LinearLayout
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -326,6 +355,36 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
+                        android:text="Number of Branches"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        android:layout_weight="1"
+                        />
+                </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/noOfbranches"
+                    android:layout_marginRight="30dp"
+                    android:inputType="number"
+                    android:hint="Total no. of branches"
+                    />
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:text="Name board seen at the building"
                         android:textAppearance="?android:textAppearanceLarge"
                         />
@@ -429,7 +488,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/app_verifired_whom"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:layout_marginRight="30dp"
                     />
                 <LinearLayout
@@ -548,6 +607,56 @@
                     android:id="@+id/disp_aff_party"
                     >
                 </Spinner>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Recommended or not"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/recomm"
+                    >
+                </Spinner>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Other Remarks"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="top"
+                    android:inputType="textPersonName"
+                    android:id="@+id/OtherRemarkseditText"
+                    android:layout_marginRight="30dp"
+                    />
                 <Button
                     android:layout_width="200dp"
                     android:layout_height="40dp"

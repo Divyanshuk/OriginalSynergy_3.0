@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,16 +21,16 @@ import java.util.Map;
 
 public class Residence extends AppCompatActivity {
 
-    EditText name,noFamilyMem,workingMem,dependMem,children,spouseEmp,registration,carpetArea,otherRemarks,relapp,mob,noyears,doba,eduqual;
-    String sname,snoFamilyMem,sworkingMem,sdependMem,schildren,sspouseEmp,sresidence,smaritalStatus,slocality;
-    Spinner residence,maritalStatus,locality,resambience,ncheck,clientcoop;
-    ArrayAdapter<CharSequence> residenceadapter;
+    EditText name,noFamilyMem,workingMem,dependMem,children,twowheeler,fourwheeler,spouseEmp,registration,carpetArea,otherRemarks,mob,noyears,doba,eduqual;
+    String sname,snoFamilyMem,sworkingMem,sdependMem,schildren,sspouseEmp,sresidence,smaritalStatus,slocality,sspousework;
+    Spinner residence,maritalStatus,locality,resambience,ncheck,clientcoop,spousework,addlock,relapp;
+    ArrayAdapter<CharSequence> residenceadapter,ambienceadapter;
     ArrayAdapter<CharSequence> maritaladapter;
-    ArrayAdapter<CharSequence> localityadapter;
+    ArrayAdapter<CharSequence> localityadapter,spouseworkadapter,clientcoopadapter,addlockadapter;
+    LinearLayout linearLayout;
 
-    String sregistration,scarpetArea,spoliticalInflu,sotherRemarks,svehicle,srelapp,smob,snoyears,sdoba,seduqual;
-    Spinner vehicle;
-    String filestr,agentid;
+    String sregistration,scarpetArea,spoliticalInflu,sotherRemarks,saddlock,srelapp,smob,snoyears,sdoba,seduqual;
+    String filestr,agentid,applorcoappl;
     ArrayAdapter<CharSequence> vehicleadapter;
 
     @Override
@@ -39,6 +40,10 @@ public class Residence extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Fill the Details");
 
+        applorcoappl = getIntent().getStringExtra("appl_coappl");
+        filestr = getIntent().getStringExtra("uniid");
+
+        linearLayout = (LinearLayout) findViewById(R.id.lin_s_emp);
         name= (EditText)findViewById(R.id.Personnameet);
         noFamilyMem=(EditText)findViewById(R.id.FamilymemeditText);
         workingMem=(EditText)findViewById(R.id.workingmemeditText);
@@ -52,15 +57,18 @@ public class Residence extends AppCompatActivity {
         carpetArea= (EditText)findViewById(R.id.CarpetAreaeditText);
         //politicalInflu= (EditText)findViewById(R.id.PoliticaleditText);
         otherRemarks= (EditText)findViewById(R.id.OtherRemarkseditText);
-        vehicle=(Spinner) findViewById(R.id.Vehiclespinner);
+        twowheeler=(EditText) findViewById(R.id.two_wheeler);
+        fourwheeler = (EditText) findViewById(R.id.fourwheelerseen);
         resambience = (Spinner) findViewById(R.id.res_ambience);
-        relapp = (EditText) findViewById(R.id.relationmet);
+        relapp = (Spinner) findViewById(R.id.rel_Appl);
         mob = (EditText) findViewById(R.id.mobno);
         noyears = (EditText) findViewById(R.id.noyears);
         doba = (EditText) findViewById(R.id.dobapp);
+        addlock = (Spinner) findViewById(R.id.add_check);
         eduqual = (EditText) findViewById(R.id.eduqual);
         ncheck = (Spinner) findViewById(R.id.neighbour_check);
         clientcoop = (Spinner) findViewById(R.id.coopspinner);
+        spousework = (Spinner)findViewById(R.id.SpouseWorkSpinner);
 
         residenceadapter=ArrayAdapter.createFromResource(this,R.array.resstatus,R.layout.support_simple_spinner_dropdown_item);
         residenceadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -103,36 +111,6 @@ public class Residence extends AppCompatActivity {
             }
         });
 
-        vehicleadapter=ArrayAdapter.createFromResource(this,R.array.vehicle,R.layout.support_simple_spinner_dropdown_item);
-        vehicleadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        vehicle.setAdapter(vehicleadapter);
-
-        vehicle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                switch (i)
-                {
-                    case 0:
-                        svehicle="Two Wheeler";
-                        break;
-                    case 1:
-                        svehicle="Car";
-                        break;
-                    case 2:
-                        svehicle="other";
-
-                }
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
         maritaladapter=ArrayAdapter.createFromResource(this,R.array.marital,R.layout.support_simple_spinner_dropdown_item);
         maritaladapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         maritalStatus.setAdapter(maritaladapter);
@@ -157,6 +135,43 @@ public class Residence extends AppCompatActivity {
             }
         });
 
+        clientcoopadapter=ArrayAdapter.createFromResource(this,R.array.transfer,R.layout.support_simple_spinner_dropdown_item);
+        clientcoopadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        clientcoop.setAdapter(clientcoopadapter);
+
+        addlockadapter=ArrayAdapter.createFromResource(this,R.array.transfer,R.layout.support_simple_spinner_dropdown_item);
+        addlockadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        addlock.setAdapter(addlockadapter);
+
+        spouseworkadapter = ArrayAdapter.createFromResource(this,R.array.transfer,R.layout.support_simple_spinner_dropdown_item);
+        spouseworkadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spousework.setAdapter(spouseworkadapter);
+
+        spousework.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                switch (i) {
+                    case 0:
+                        sspousework = "YES";
+
+                        break;
+                    case 1:
+                        sspousework = "NO";
+                        linearLayout.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        ambienceadapter = ArrayAdapter.createFromResource(this,R.array.ambience,R.layout.support_simple_spinner_dropdown_item);
+        ambienceadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        resambience.setAdapter(ambienceadapter);
 
 
         localityadapter=ArrayAdapter.createFromResource(this,R.array.locality,R.layout.support_simple_spinner_dropdown_item);
@@ -224,14 +239,19 @@ public class Residence extends AppCompatActivity {
         scarpetArea = carpetArea.getText().toString();
         //spoliticalInflu = politicalInflu.getText().toString();
         sotherRemarks = otherRemarks.getText().toString();
-        svehicle = vehicle.getSelectedItem().toString();
-        srelapp = relapp.getText().toString();
+        srelapp = relapp.getSelectedItem().toString();
         smob = mob.getText().toString();
         snoyears = noyears.getText().toString();
         sdoba = doba.getText().toString();
         seduqual = eduqual.getText().toString();
+        saddlock = addlock.getSelectedItem().toString();
+        final String sclientcoop = clientcoop.getSelectedItem().toString();
+        final String stwo = twowheeler.getText().toString();
+        final String sfour = fourwheeler.getText().toString();
+        sspousework = spousework.getSelectedItem().toString();
+        final String sambience = resambience.getSelectedItem().toString();
 
-        String server_url = "";
+        String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -248,7 +268,14 @@ public class Residence extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String,String>();
 
-                params.put("REFNO","");
+                if(applorcoappl.equals("APPLICANT")) {
+                    params.put("tablename","appl_residence");
+                } else {
+                    params.put("tablename","coappl_residence");
+                }
+
+
+                params.put("REFNO",filestr);
                 params.put("PERSONMET",sname);
                 params.put("RELATIOAPPL",srelapp);
                 params.put("PERSONPHONE",smob);
@@ -261,17 +288,17 @@ public class Residence extends AppCompatActivity {
                 params.put("WORKING",sworkingMem);
                 params.put("ADULTSDEP",sdependMem);
                 params.put("CHILDDEP",schildren);
-                params.put("SPOUSEWORK","");
+                params.put("SPOUSEWORK",sspousework);
                 params.put("SPOUSEEMP",sspouseEmp);
-                params.put("COOPERATIVE","");
-                params.put("NEIGHBOURHOOD","");
+                params.put("COOPERATIVE",sclientcoop);
+                params.put("NEIGHBOURHOOD",saddlock);
                 params.put("LOCALITY",slocality);
-                params.put("AMBIENCE","");
+                params.put("AMBIENCE",sambience);
                 params.put("CARPETAREA",scarpetArea);
                 params.put("NAPPLSTAY","");
                 params.put("NNOOFFAMILY","");
-                params.put("WHEELER2",svehicle);
-                params.put("WHEELER4","");
+                params.put("WHEELER2",stwo);
+                params.put("WHEELER4",sfour);
                 params.put("REMARKS",sotherRemarks);
 
                 return params;

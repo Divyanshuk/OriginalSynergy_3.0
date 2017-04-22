@@ -48,16 +48,17 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
 //        holder.textView8.setTypeface(tf);
 //        holder.textView9.setTypeface(tf);
 
+        String applcoappl = cardDetails.getApplorco();
 
         holder.textView1.setText(cardDetails.getName());
-        holder.textView2.setText(cardDetails.getRefno());
+        holder.textView2.setText(cardDetails.getApplorco());
         holder.textView3.setText(cardDetails.getType());
         holder.textView4.setText(cardDetails.getAddress());
-        holder.textView5.setText(cardDetails.getApplorco());
+       // holder.textView5.setText(cardDetails.getApplorco());
         holder.textView6.setText(cardDetails.getMobile());
        // holder.textView7.setText(cardDetails.);
-        holder.textView8.setText(cardDetails.getFos());
-       // holder.textView9.setText(cardDetails.getUniid());
+       // holder.textView8.setText(cardDetails.getFos());
+        holder.textView9.setText(cardDetails.getRefno());
     }
 
 
@@ -79,14 +80,14 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
             this.context = context;
 
             textView1 = (TextView) itemView.findViewById(R.id.name);
-            textView2 = (TextView) itemView.findViewById(R.id.file_no);
+            textView2 = (TextView) itemView.findViewById(R.id.appl_coappl);
             textView3 = (TextView) itemView.findViewById(R.id.add_type);
             textView4 = (TextView) itemView.findViewById(R.id.address);
-            textView5 = (TextView) itemView.findViewById(R.id.land_mark);
+           // textView5 = (TextView) itemView.findViewById(R.id.land_mark);
             textView6 = (TextView) itemView.findViewById(R.id.p_contact);
           //  textView7 = (TextView) itemView.findViewById(R.id.s_contact);
-            textView8 = (TextView)itemView.findViewById(R.id.age);
-          //  textView9 = (TextView)itemView.findViewById(R.id.uniid);
+          //  textView8 = (TextView)itemView.findViewById(R.id.age);
+            textView9 = (TextView)itemView.findViewById(R.id.refno);
 
             itemView.setOnClickListener(this);
         }
@@ -98,14 +99,15 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
                 Intent intent = new Intent(this.context, Residence.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("name", textView1.getText().toString());
-                intent.putExtra("file", textView2.getText().toString());
+                intent.putExtra("appl_coappl", textView2.getText().toString());
                 intent.putExtra("addtype", textView3.getText().toString());
                 intent.putExtra("address", textView4.getText().toString());
-                intent.putExtra("landmark", textView5.getText().toString());
+              //  intent.putExtra("landmark", textView5.getText().toString());
                 intent.putExtra("pcontact", textView6.getText().toString());
+
               //  intent.putExtra("scontact", textView7.getText().toString());
-                intent.putExtra("agent", textView8.getText().toString());
-              //  intent.putExtra("uniid", textView9.getText().toString().trim());
+              //  intent.putExtra("agent", textView8.getText().toString());
+                intent.putExtra("uniid", textView9.getText().toString().trim());
 //                Log.d("AgentAdap", textView8.getText().toString());
 //                Log.d("UniqueAdap", textView9.getText().toString());
                 context.startActivity(intent);
@@ -113,14 +115,14 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
                 Intent intent = new Intent(this.context, Office.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("name", textView1.getText().toString());
-                intent.putExtra("file", textView2.getText().toString());
+            intent.putExtra("appl_coappl", textView2.getText().toString());
                 intent.putExtra("addtype", textView3.getText().toString());
                 intent.putExtra("address", textView4.getText().toString());
-                intent.putExtra("landmark", textView5.getText().toString());
+             //   intent.putExtra("landmark", textView5.getText().toString());
                 intent.putExtra("pcontact", textView6.getText().toString());
              //   intent.putExtra("scontact", textView7.getText().toString());
-                intent.putExtra("agent", textView8.getText().toString());
-             //   intent.putExtra("uniid", textView9.getText().toString().trim());
+             //   intent.putExtra("agent", textView8.getText().toString());
+                intent.putExtra("uniid", textView9.getText().toString().trim());
 //                Log.d("AgentAdap", textView8.getText().toString());
 //                Log.d("UniqueAdap", textView9.getText().toString());
                 context.startActivity(intent);
@@ -128,14 +130,14 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
                 Intent intent = new Intent(this.context, Business.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("name", textView1.getText().toString());
-                intent.putExtra("file", textView2.getText().toString());
+            intent.putExtra("appl_coappl", textView2.getText().toString());
                 intent.putExtra("addtype", textView3.getText().toString());
                 intent.putExtra("address", textView4.getText().toString());
-                intent.putExtra("landmark", textView5.getText().toString());
+               // intent.putExtra("landmark", textView5.getText().toString());
                 intent.putExtra("pcontact", textView6.getText().toString());
-                intent.putExtra("scontact", textView7.getText().toString());
+               // intent.putExtra("scontact", textView7.getText().toString());
              //   intent.putExtra("agent", textView8.getText().toString());
-             //   intent.putExtra("uniid", textView9.getText().toString().trim());
+                intent.putExtra("uniid", textView9.getText().toString().trim());
 //                Log.d("AgentAdap", textView8.getText().toString());
 //                Log.d("UniqueAdap", textView9.getText().toString());
                 context.startActivity(intent);

@@ -26,6 +26,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -57,6 +58,7 @@ public class LocationPhoto extends AppCompatActivity {
     ProgressDialog dialog;
     private Bitmap bitmap;
     private Uri filepath;
+    ProgressDialog progressDialog;
     private int PICK_IMAGE_REQUEST = 1;
 
     public static final String UPLOAD_URL = "http://139.59.5.200/repignite/android/imageupload.php";
@@ -77,6 +79,8 @@ public class LocationPhoto extends AppCompatActivity {
      //   fileno = getIntent().getStringExtra("file");
      //   agentid = getIntent().getStringExtra("agent");
      //   Type = getIntent().getStringExtra("type");
+
+        progressDialog = new ProgressDialog(LocationPhoto.this);
 
         photo = (FloatingActionButton) findViewById(R.id.pho);
 
@@ -277,9 +281,10 @@ public class LocationPhoto extends AppCompatActivity {
 //        UploadImage ui = new UploadImage();
 //        ui.execute(bitmap);
 
-        ProgressDialog progressDialog = new ProgressDialog(LocationPhoto.this);
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Uploading Image");
+        progressDialog.show();
+        Log.d("Entered","ENTER");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -293,6 +298,8 @@ public class LocationPhoto extends AppCompatActivity {
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+
+//                progressDialog.show();
                 Map<String,String> params = new HashMap<String, String>();
 
                 params.put("NAME","NIKHIL");
@@ -307,7 +314,9 @@ public class LocationPhoto extends AppCompatActivity {
 
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 30, baos);
+        Log.d("COMPRESS","COmpressing");
+    //    progressDialog.show();
+        bmp.compress(Bitmap.CompressFormat.JPEG,20, baos);
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;

@@ -22,18 +22,20 @@ public class Office extends AppCompatActivity {
 
 
 
-    EditText name,designation,mobile,joinDate,desigApp,noYears,companyNature,remarks,detsalary;
+    EditText name,designation,mobile,joinDate,desigApp,noYears,companyNature,remarks,detsalary,orgname;
     String sname,sdesignation,smobile,sjoinDate,sdesigApp,snoYears,scompanyNature,sremarks,sjobType,sworkOrg,sjobTransfer,sdetsalary;
-    String filestr,agentid;
-    Spinner jobType,workOrg,jobTransfer;
+    String filestr,agentid,applorcoappl;
+    Spinner jobType,workOrg,jobTransfer,recomm;
     ArrayAdapter<CharSequence> jobtypeadapter;
     ArrayAdapter<CharSequence> workorgadapter;
-    ArrayAdapter<CharSequence> jobtransferadapter;
+    ArrayAdapter<CharSequence> jobtransferadapter,recommadapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_office);
 
+        applorcoappl = getIntent().getStringExtra("appl_coappl");
+        filestr = getIntent().getStringExtra("uniid");
         name=(EditText)findViewById(R.id.personconteditText);
         designation=(EditText)findViewById(R.id.desigPCeditText);
         mobile=(EditText)findViewById(R.id.mobPCeditText);
@@ -46,6 +48,8 @@ public class Office extends AppCompatActivity {
         workOrg=(Spinner)findViewById(R.id.workingAsspinner);
         jobTransfer=(Spinner)findViewById(R.id.transferspinner);
         detsalary = (EditText)findViewById(R.id.det_ver);
+        orgname = (EditText) findViewById(R.id.nameoforganisation);
+        recomm = (Spinner)findViewById(R.id.recomm);
 
         jobtypeadapter=ArrayAdapter.createFromResource(this,R.array.jobtype,R.layout.support_simple_spinner_dropdown_item);
         jobtypeadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -145,12 +149,15 @@ public class Office extends AppCompatActivity {
                 }
 
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
+
+        recommadapter=ArrayAdapter.createFromResource(this,R.array.recom_or_not,R.layout.support_simple_spinner_dropdown_item);
+        recommadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        recomm.setAdapter(jobtransferadapter);
     }
 
     public void onClickNextso1(View view) {
@@ -164,6 +171,8 @@ public class Office extends AppCompatActivity {
         scompanyNature=companyNature.getText().toString().trim();
         sremarks=remarks.getText().toString().trim();
         sdetsalary = detsalary.getText().toString().trim();
+        final String sorgname = orgname.getText().toString();
+        final String recom = recomm.getSelectedItem().toString();
 
         String server_url = "";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
@@ -181,19 +190,27 @@ public class Office extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("REFNO","");
+
+                if(applorcoappl.equals("APPLICANT")) {
+                    params.put("tablename","appl_employment");
+                } else {
+                    params.put("tablename","coappl_employment");
+                }
+
+                params.put("REFNO",filestr);
                 params.put("PERSONMET",sname);
                 params.put("DESIGNAPPL",sdesigApp);
                 params.put("PERSONDESIGN",sdesignation);
                 params.put("PERSONPHONE",smobile);
                 params.put("NOOFYEARS",snoYears);
-                params.put("ORGNAME","");
+                params.put("ORGNAME",sorgname);
                 params.put("ORGNATURE",scompanyNature);
                 params.put("JOBTYPE",sjobType);
                 params.put("WORKINGAS",sworkOrg);
                 params.put("TRANSFERABLE",sjobTransfer);
                 params.put("SALARYPERSON",sdetsalary);
                 params.put("SALARYDESIGN","");
+                params.put("RECOMM",recom);
                 params.put("REMARKS",sremarks);
 
                 return params;

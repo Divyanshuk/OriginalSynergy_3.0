@@ -1,5 +1,6 @@
 package com.example.mohitkumar.originalsynergygo;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
@@ -19,35 +20,50 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Business extends AppCompatActivity {
 
-    EditText name,desig,contact,offTele,bussNature,YearCompany,noEmployee,appnamever;
-    String sname,sdesig,scontact,soffTele,sbussNature,sYearCompany,snoEmployee,sverified,svcard;
-    Spinner typeCompany,vcard,nameboard,ambience,exterior,bact,locate,empsighted,polaffl;
-    String filestr,agenti;
+    EditText name,desig,contact,offTele,bussNature,YearCompany,noEmployee,appnamever,namebusiness,pdesig,remarks,noBranches;
+    String sname,sdesig,scontact,soffTele,sbussNature,sYearCompany,snoEmployee,sverified,svcard,sremarks;
+    Spinner typeCompany,vcard,nameboard,ambience,exterior,bact,locate,empsighted,polaffl,recomm;
+    String filestr,agenti,applorcoappl;
     String stypeCompany,snameboard,sambience,sexterior,sbact,slocate,sempsighted,spolaffl;
     ArrayAdapter<CharSequence> typecompadapter,nameBoardadapter,ambienceadapter,exterioradapter,bactadapter
-            ,locateadapter,empsightedadapter,polaffladapter,vcardadapter;
+            ,locateadapter,empsightedadapter,polaffladapter,vcardadapter,recommadapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business);
 
+        applorcoappl = getIntent().getStringExtra("appl_coappl");
+        filestr = getIntent().getExtras().getString("uniid");
+
+
         name= (EditText)findViewById(R.id.nameeditText);
+        nameboard = (Spinner)findViewById(R.id.nameboard);
+        ambience = (Spinner) findViewById(R.id.amb_office);
         desig= (EditText)findViewById(R.id.designationeditText);
         contact= (EditText)findViewById(R.id.phoneeditText);
         offTele= (EditText)findViewById(R.id.offteleditText);
         bussNature= (EditText)findViewById(R.id.busnatureeditText);
         YearCompany= (EditText)findViewById(R.id.yearseditText);
+        namebusiness = (EditText)findViewById(R.id.namebusiness);
         noEmployee= (EditText)findViewById(R.id.EmpeditText);
+        exterior = (Spinner) findViewById(R.id.exterior);
+        noBranches = (EditText) findViewById(R.id.noOfbranches);
+        pdesig = (EditText) findViewById(R.id.persondesignation);
+        locate = (Spinner) findViewById(R.id.easy_locate);
+        polaffl = (Spinner) findViewById(R.id.disp_aff_party);
+        remarks = (EditText) findViewById(R.id.OtherRemarkseditText);
+        empsighted = (Spinner) findViewById(R.id.no_of_in_prem);
+        bact = (Spinner) findViewById(R.id.business_activity);
         typeCompany= (Spinner) findViewById(R.id.spinnecompanytyper);
         vcard = (Spinner) findViewById(R.id.vcardspinner);
         appnamever = (EditText) findViewById(R.id.app_verifired_whom);
-
-
+        recomm = (Spinner)findViewById(R.id.recomm);
 
         typecompadapter = ArrayAdapter.createFromResource(this, R.array.company, R.layout.support_simple_spinner_dropdown_item);
         typecompadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -160,7 +176,7 @@ public class Business extends AppCompatActivity {
         exterioradapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         exterior.setAdapter(exterioradapter);
 
-        typeCompany.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        exterior.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -284,11 +300,19 @@ public class Business extends AppCompatActivity {
             }
         });
 
+        recommadapter = ArrayAdapter.createFromResource(this, R.array.recom_or_not, R.layout.support_simple_spinner_dropdown_item);
+        recommadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        recomm.setAdapter(polaffladapter);
     }
 
     public void onClickNextb1(View view) {
 
-        filestr = getIntent().getExtras().getString("file");
+        ProgressDialog progressDialog = new ProgressDialog(Business.this);
+        progressDialog.setTitle("Uploadng");
+        progressDialog.setMessage("Pushing your details....");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
         sname = name.getText().toString().trim();
         sdesig = desig.getText().toString().trim();
         scontact = contact.getText().toString().trim();
@@ -306,8 +330,22 @@ public class Business extends AppCompatActivity {
         slocate = locate.getSelectedItem().toString();
         sverified = appnamever.getText().toString();
         svcard = vcard.getSelectedItem().toString();
+        sremarks = remarks.getText().toString();
+        final String spdesig = pdesig.getText().toString();
+        final String namebus = namebusiness.getText().toString();
+        final String sbranches = noBranches.getText().toString();
+        final String srecomm = recomm.getSelectedItem().toString();
 
-        String server_url = "";
+        Date date = new Date();
+        long hours = date.getHours();
+        long minutes = date.getMinutes();
+        final String time = String.valueOf(hours) + String.valueOf(minutes);
+
+        long dt = date.getDate();
+        final String date1 = String.valueOf(dt);
+
+        String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -324,18 +362,26 @@ public class Business extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String,String>();
 
-                params.put("REFNO","");
+                if(applorcoappl.equals("APPLICANT")) {
+                    params.put("tablename","appl_business");
+                } else {
+                    params.put("tablename","coappl_business");
+                }
+
+                params.put("REFNO",filestr);
+                params.put("DATE",date1);
+                params.put("TIME",time);
                 params.put("PERSONMET",sname);
                 params.put("DESIGNAPPL",sdesig);
-                params.put("PERSONDESIGN","");
+                params.put("PERSONDESIGN",spdesig);
                 params.put("PERSONPHONE",scontact);
                 params.put("NOOFYEARS",sYearCompany);
                 params.put("VISITCARD",svcard);
-                params.put("ORGNAME","");
+                params.put("ORGNAME",namebus);
                 params.put("ORGNAME",sbussNature);
                 params.put("ORGTYPE", stypeCompany);
                 params.put("NOOFEMPL",snoEmployee);
-                params.put("NOOFBRANCH","");
+                params.put("NOOFBRANCH",sbranches);
                 params.put("BOOLBOARD",snameboard);
                 params.put("AMBIENCE",sambience);
                 params.put("EXTERIOR",sexterior);
@@ -343,14 +389,16 @@ public class Business extends AppCompatActivity {
                 params.put("EASELOCATE",slocate);
                 params.put("ORGACTIVITY",sbact);
                 params.put("POLPARTYAFFL",spolaffl);
-                params.put("REMARKS","");
+                params.put("RECOMM",srecomm);
                 params.put("SEENNOOFEMPL",sempsighted);
-                params.put("REMARKS","");
+                params.put("REMARKS",sremarks);
 
                 return params;
             }
         };
 
         MySingleton.getInstance(Business.this).addToRequestQueue(stringRequest);
+
+        progressDialog.dismiss();
     }
 }

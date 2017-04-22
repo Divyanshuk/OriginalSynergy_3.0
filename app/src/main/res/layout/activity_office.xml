@@ -186,6 +186,35 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
+                        android:text="Name of Organisation"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        android:layout_weight="1"
+                        />
+                </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nameoforganisation"
+                    android:layout_marginRight="30dp"
+                    android:inputType="textPersonName"
+                    />
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:text="Nature of company's business"
                         android:textAppearance="?android:textAppearanceLarge"
                         />
@@ -357,6 +386,35 @@
                     android:id="@+id/OtherRemarkseditText"
                     android:layout_marginRight="30dp"
                     />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Recommended or not"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/recomm"
+                    >
+                </Spinner>
                 <Button
                     android:layout_width="200dp"
                     android:layout_height="40dp"

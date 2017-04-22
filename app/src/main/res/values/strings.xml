@@ -105,4 +105,17 @@
         <item>POSITIVE</item>
         <item>NEGATIVE</item>
     </string-array>
+    <string-array name="recom_or_not">
+        <item>RECOMMENDED</item>
+        <item>NOT RECOMMENDED</item>
+    </string-array>
+
+    <string-array name="rel_appl">
+        <item>MOTHER</item>
+        <item>FATHER</item>
+        <item>BROTHER</item>
+        <item>SISTER</item>
+        <item>HUSBAND</item>
+        <item>WIFE</item>
+    </string-array>
 </resources>
