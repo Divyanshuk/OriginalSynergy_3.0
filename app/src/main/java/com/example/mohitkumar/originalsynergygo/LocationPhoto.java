@@ -349,8 +349,8 @@ public class LocationPhoto extends AppCompatActivity {
 //                progressDialog.show();
                 Map<String,String> params = new HashMap<String, String>();
 
-                params.put("NAME","NIKHIL");
-                params.put("IMAGE",getStringImage(bitmap));
+                params.put("LATTITUDE",lat.getText().toString());
+                params.put("LONGITUDE",lng.getText().toString());
 
                 return params;
             }

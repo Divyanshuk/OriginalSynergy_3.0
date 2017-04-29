@@ -1,18 +1,33 @@
 package com.example.mohitkumar.originalsynergygo;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,17 +36,28 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class Business extends AppCompatActivity {
 
-    EditText name,desig,contact,offTele,bussNature,YearCompany,noEmployee,appnamever,namebusiness,pdesig,remarks,noBranches;
+    EditText name,desig,contact,offTele,bussNature,YearCompany,noEmployee,appnamever,namebusiness,pdesig,remarks,noBranches,empsighted;
     String sname,sdesig,scontact,soffTele,sbussNature,sYearCompany,snoEmployee,sverified,svcard,sremarks;
-    Spinner typeCompany,vcard,nameboard,ambience,exterior,bact,locate,empsighted,polaffl,recomm;
+    Spinner typeCompany,vcard,nameboard,ambience,exterior,bact,locate,polaffl,recomm;
     String filestr,agenti,applorcoappl;
+    ProgressDialog dialog;
+    Button refresh;
+    private double latitude = 0;
+    private double longitude = 0;
+    TextView lat,lng;
+    public static final int LOCATION_REQ_CODE = 100;
+    public static final int EXTERNAL_STORAGE_CODE = 101;
+    LocationManager locationManager;
     String stypeCompany,snameboard,sambience,sexterior,sbact,slocate,sempsighted,spolaffl;
     ArrayAdapter<CharSequence> typecompadapter,nameBoardadapter,ambienceadapter,exterioradapter,bactadapter
             ,locateadapter,empsightedadapter,polaffladapter,vcardadapter,recommadapter;
@@ -61,7 +87,7 @@ public class Business extends AppCompatActivity {
         locate = (Spinner) findViewById(R.id.easy_locate);
         polaffl = (Spinner) findViewById(R.id.disp_aff_party);
         remarks = (EditText) findViewById(R.id.OtherRemarkseditText);
-        empsighted = (Spinner) findViewById(R.id.no_of_in_prem);
+        empsighted = (EditText) findViewById(R.id.no_of_in_prem);
         bact = (Spinner) findViewById(R.id.business_activity);
         typeCompany= (Spinner) findViewById(R.id.spinnecompanytyper);
         vcard = (Spinner) findViewById(R.id.vcardspinner);
@@ -71,28 +97,6 @@ public class Business extends AppCompatActivity {
         typecompadapter = ArrayAdapter.createFromResource(this, R.array.company, R.layout.support_simple_spinner_dropdown_item);
         typecompadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         typeCompany.setAdapter(typecompadapter);
-
-        typeCompany.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                switch (i) {
-                    case 0:
-                        stypeCompany = "C1";
-                        break;
-                    case 1:
-                        stypeCompany = "C2";
-                        break;
-                }
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         nameBoardadapter = ArrayAdapter.createFromResource(this, R.array.name_board, R.layout.support_simple_spinner_dropdown_item);
         nameBoardadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -255,30 +259,6 @@ public class Business extends AppCompatActivity {
             }
         });
 
-        empsightedadapter = ArrayAdapter.createFromResource(this, R.array.emp_sighted, R.layout.support_simple_spinner_dropdown_item);
-        empsightedadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        empsighted.setAdapter(empsightedadapter);
-
-        empsighted.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                switch (i) {
-                    case 0:
-                        sempsighted = "YES";
-                        break;
-                    case 1:
-                        sempsighted = "NO";
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
         polaffladapter = ArrayAdapter.createFromResource(this, R.array.aff_pol_party, R.layout.support_simple_spinner_dropdown_item);
         polaffladapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         polaffl.setAdapter(polaffladapter);
@@ -306,6 +286,77 @@ public class Business extends AppCompatActivity {
         recommadapter = ArrayAdapter.createFromResource(this, R.array.recom_or_not, R.layout.support_simple_spinner_dropdown_item);
         recommadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         recomm.setAdapter(recommadapter);
+
+        lat = (TextView) findViewById(R.id.lat);
+        lng = (TextView) findViewById(R.id.lng);
+        refresh = (Button) findViewById(R.id.refresh);
+
+        boolean permissionCheck = LocationPhoto.Utility.checkPermissions(this, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (isLocationServicesAvailable(Business.this)) {
+
+                    Log.d("THIS","HERE");
+                    dialog = new ProgressDialog(Business.this);
+                    dialog.setMessage("Getting Your location....");
+                    dialog.show();
+                    if (ActivityCompat.checkSelfPermission(Business.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Business.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 100, locationListener);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 100, locationListener);
+                    dialog.dismiss();
+                } else {
+                    Log.d("THIS","HERE 2");
+                    if (ActivityCompat.checkSelfPermission(Business.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Business.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    AlertDialog.Builder builder =
+                            new AlertDialog.Builder(Business.this);
+                    final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
+                    final String message = "Enable either GPS or any other location"
+                            + " service to find current location.  Click OK to go to"
+                            + " location services settings to let you do so.";
+                    builder.setTitle("Enable Location");
+
+                    builder.setMessage(message)
+                            .setPositiveButton("OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface d, int id) {
+                                            startActivity(new Intent(action));
+                                            d.dismiss();
+                                        }
+                                    })
+                            .setNegativeButton("Cancel",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface d, int id) {
+                                            d.cancel();
+                                        }
+                                    }).show();
+                }
+
+            }
+        });
+
     }
 
     public void onClickNextb1(View view) {
@@ -325,7 +376,7 @@ public class Business extends AppCompatActivity {
         snoEmployee = noEmployee.getText().toString();
         stypeCompany = typeCompany.getSelectedItem().toString();
         spolaffl = polaffl.getSelectedItem().toString();
-        sempsighted = empsighted.getSelectedItem().toString();
+        sempsighted = empsighted.getText().toString();
         sexterior = exterior.getSelectedItem().toString();
         sambience = ambience.getSelectedItem().toString();
         snameboard = nameboard.getSelectedItem().toString();
@@ -338,22 +389,29 @@ public class Business extends AppCompatActivity {
         final String namebus = namebusiness.getText().toString();
         final String sbranches = noBranches.getText().toString();
         final String srecomm = recomm.getSelectedItem().toString();
+        final String latt = lat.getText().toString();
+        final String longi = lng.getText().toString();
 
-        Date date = new Date();
-        long hours = date.getHours();
-        long minutes = date.getMinutes();
-        final String time = String.valueOf(hours) + String.valueOf(minutes);
+        Calendar c = Calendar.getInstance();
 
-        long dt = date.getDate();
-        final String date1 = String.valueOf(dt);
+        int seconds = c.get(Calendar.SECOND);
+        int minutes = c.get(Calendar.MINUTE);
+        int hour = c.get(Calendar.HOUR);
+        final String time = hour+":"+minutes+":"+seconds;
 
-        Log.d(time,date1);
+
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+        final String date = day+"/"+month+"/"+year;
+
+
         String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                Log.d("RESPONSE",response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -373,8 +431,8 @@ public class Business extends AppCompatActivity {
                 }
 
                 params.put("REFNO",filestr);
-              //  params.put("DATE",date1);
-              //  params.put("TIME",time);
+                params.put("DATE",date);
+                params.put("TIME",time);
                 params.put("PERSONMET",sname);
                 params.put("DESIGNAPPL",sdesig);
                 params.put("PERSONDESIGN",spdesig);
@@ -382,7 +440,7 @@ public class Business extends AppCompatActivity {
                 params.put("NOOFYEARS",sYearCompany);
                 params.put("VISITCARD",svcard);
                 params.put("ORGNAME",namebus);
-                params.put("ORGNAME",sbussNature);
+                params.put("ORGNATURE",sbussNature);
                 params.put("ORGTYPE", stypeCompany);
                 params.put("NOOFEMPL",snoEmployee);
                 params.put("NOOFBRANCH",sbranches);
@@ -396,7 +454,8 @@ public class Business extends AppCompatActivity {
                 params.put("RECOMM",srecomm);
                 params.put("SEENNOOFEMPL",sempsighted);
                 params.put("REMARKS",sremarks);
-
+                params.put("LATTITUDE",latt);
+                params.put("LONGITUDE",longi);
                 return params;
             }
         };
@@ -410,5 +469,90 @@ public class Business extends AppCompatActivity {
         intent.putExtra("ADDRESS","BUSINESS");
         intent.putExtra("APPL",applorcoappl);
         startActivity(intent);
+    }
+
+    LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            Geocoder geocoder=new Geocoder(getApplicationContext(), Locale.getDefault());
+
+            try {
+                List<Address> addresses=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+                Address address=addresses.get(0);
+                String useradd="";
+                for(int i=0;i<address.getMaxAddressLineIndex();i++)
+                    useradd=useradd+address.getAddressLine(i).toString()+"\n";
+                useradd=useradd+(address.getCountryName().toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            dialog.dismiss();
+            latitude = location.getLatitude();
+            longitude =location.getLongitude();
+            if (latitude != 0 && longitude != 0){
+
+                lat.setText("Latitude is :" +location.getLatitude());
+                lng.setText("Longitude is :" +location.getLongitude());
+
+                dialog.dismiss();
+            }
+
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+            dialog.dismiss();
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            dialog.dismiss();
+        }
+    };
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == LOCATION_REQ_CODE){
+            if(permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION)  {
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED)  {
+                    dialog.setMessage("Getting Coordinates");
+                    dialog.show();
+                    //noinspection MissingPermission
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,locationListener);
+                    dialog = new ProgressDialog(Business.this);
+                }
+            }
+        }
+    }
+
+    public static boolean isLocationServicesAvailable(Context context) {
+        int locationMode = 0;
+        String locationProviders;
+        boolean isAvailable = false;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+            try {
+                locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            isAvailable = (locationMode != Settings.Secure.LOCATION_MODE_OFF);
+        } else {
+            locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+            isAvailable = !TextUtils.isEmpty(locationProviders);
+        }
+
+        boolean coarsePermissionCheck = (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+        boolean finePermissionCheck = (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+
+        return isAvailable && (coarsePermissionCheck || finePermissionCheck);
     }
 }
