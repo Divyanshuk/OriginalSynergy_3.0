@@ -87,7 +87,7 @@ public class Business extends AppCompatActivity {
         locate = (Spinner) findViewById(R.id.easy_locate);
         polaffl = (Spinner) findViewById(R.id.disp_aff_party);
         remarks = (EditText) findViewById(R.id.OtherRemarkseditText);
-        empsighted = (EditText) findViewById(R.id.no_of_in_prem);
+        empsighted = (EditText) findViewById(R.id.no_emp_in_prem);
         bact = (Spinner) findViewById(R.id.business_activity);
         typeCompany= (Spinner) findViewById(R.id.spinnecompanytyper);
         vcard = (Spinner) findViewById(R.id.vcardspinner);
@@ -431,8 +431,8 @@ public class Business extends AppCompatActivity {
                 }
 
                 params.put("REFNO",filestr);
-                params.put("DATE",date);
-                params.put("TIME",time);
+                params.put("DATEVISIT",date);
+                params.put("TIMEVISIT",time);
                 params.put("PERSONMET",sname);
                 params.put("DESIGNAPPL",sdesig);
                 params.put("PERSONDESIGN",spdesig);

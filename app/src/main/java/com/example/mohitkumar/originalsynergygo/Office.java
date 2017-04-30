@@ -37,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -281,6 +282,19 @@ public class Office extends AppCompatActivity {
         final String latt = lat.getText().toString();
         final String longi = lng.getText().toString();
 
+        Calendar c = Calendar.getInstance();
+
+        int seconds = c.get(Calendar.SECOND);
+        int minutes = c.get(Calendar.MINUTE);
+        int hour = c.get(Calendar.HOUR);
+        final String time = hour+":"+minutes+":"+seconds;
+
+
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+        final String date = day+"/"+month+"/"+year;
+
 
         String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
@@ -323,6 +337,9 @@ public class Office extends AppCompatActivity {
 
                 params.put("LATTITUDE",latt);
                 params.put("LONGITUDE",longi);
+
+                params.put("DATEVISIT",date);
+                params.put("TIMEVISIT",time);
                 return params;
 
             }

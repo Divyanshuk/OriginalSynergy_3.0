@@ -133,7 +133,13 @@ public class AssignmentChoose extends AppCompatActivity {
         return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 
-//    public ArrayList<CardDetails> getList() {
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        
+    }
+
+    //    public ArrayList<CardDetails> getList() {
 //        final ArrayList<CardDetails> arrayList = new ArrayList<CardDetails>();
 //        ProgressDialog progressDialog = new ProgressDialog(AssignmentChoose.this);
 //        progressDialog.setTitle("Wait..");

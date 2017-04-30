@@ -97,7 +97,7 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
 
         if(textView3.getText().toString().equals("RESIDENCE")) {
                 Intent intent = new Intent(this.context, Residence.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("name", textView1.getText().toString());
                 intent.putExtra("appl_coappl", textView2.getText().toString());
                 intent.putExtra("addtype", textView3.getText().toString());
@@ -113,7 +113,7 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
                 context.startActivity(intent);
             } else if(textView3.getText().toString().equals("SERVICE")) {
                 Intent intent = new Intent(this.context, Office.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("name", textView1.getText().toString());
             intent.putExtra("appl_coappl", textView2.getText().toString());
                 intent.putExtra("addtype", textView3.getText().toString());
@@ -128,7 +128,7 @@ public class RecyclerCardAdapter extends RecyclerView.Adapter<RecyclerCardAdapte
                 context.startActivity(intent);
             } else if(textView3.getText().toString().equals("BUSINESS")) {
                 Intent intent = new Intent(this.context, Business.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("name", textView1.getText().toString());
             intent.putExtra("appl_coappl", textView2.getText().toString());
                 intent.putExtra("addtype", textView3.getText().toString());
