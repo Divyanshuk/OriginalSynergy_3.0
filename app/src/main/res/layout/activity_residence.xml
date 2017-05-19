@@ -166,7 +166,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/dobapp"
-                    android:inputType="number"
+                    android:inputType="datetime"
                     android:layout_marginRight="30dp"
                     />
                 <LinearLayout
@@ -190,13 +190,14 @@
                         android:textColor="#ee4242"
                         />
                 </LinearLayout>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/eduqual"
-                    android:inputType="text"
-                    android:layout_marginRight="30dp"
-                    />
+                <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/eduqual"
+                android:layout_marginRight="50dp"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                ></Spinner>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -436,6 +437,64 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
+                        android:text="How cooperative was the client?"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/coopspinner"
+                    >
+                </Spinner>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Neighbourhood Check"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/neighbour_check"
+                    >
+                </Spinner>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:text="Locality"
                         android:textAppearance="?android:textAppearanceLarge"
                         />
@@ -455,6 +514,90 @@
                     android:id="@+id/Localityspinner"
                     >
                 </Spinner>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Residence Ambience"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/res_ambience"
+                    >
+                </Spinner>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Carpet Area"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:id="@+id/CarpetAreaeditText"
+                    android:layout_marginRight="30dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="If address locked,applicant stays at address? "
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="#ee4242"
+                        />
+                </LinearLayout>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/add_check"
+                    ></Spinner>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -542,61 +685,8 @@
                     android:inputType="number"
                     android:layout_marginRight="30dp"
                     />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="Carpet Area"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_weight="1"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:textColor="#ee4242"
-                        />
-                </LinearLayout>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:id="@+id/CarpetAreaeditText"
-                    android:layout_marginRight="30dp"
-                    />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="If address locked "
-                        android:textAppearance="?android:textAppearanceLarge"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_weight="1"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:textColor="#ee4242"
-                        />
-                </LinearLayout>
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="50dp"
-                    android:id="@+id/add_check"
-                    ></Spinner>
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -625,93 +715,7 @@
                     android:layout_marginRight="30dp"
                     android:inputType="textPersonName"
                     />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="How cooperative was the client?"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_weight="1"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:textColor="#ee4242"
-                        />
-                </LinearLayout>
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="50dp"
-                    android:id="@+id/coopspinner"
-                    >
-                </Spinner>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="Neighbourhood Check"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_weight="1"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:textColor="#ee4242"
-                        />
-                </LinearLayout>
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="50dp"
-                    android:id="@+id/neighbour_check"
-                    >
-                </Spinner>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="Residence Ambience"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="*"
-                        android:layout_weight="1"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:textColor="#ee4242"
-                        />
-                </LinearLayout>
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="50dp"
-                    android:id="@+id/res_ambience"
-                    >
-                </Spinner>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -136,6 +136,8 @@ public class AssignmentChoose extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        startActivity(intent);
         
     }
 

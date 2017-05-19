@@ -60,6 +60,7 @@ public class LocationPhoto extends AppCompatActivity {
     private Bitmap bitmap;
     private Uri filepath;
     ProgressDialog progressDialog;
+    Button button;
     private int PICK_IMAGE_REQUEST = 1;
 
     public static final String UPLOAD_URL = "http://139.59.5.200/repignite/android/imageupload.php";
@@ -77,6 +78,7 @@ public class LocationPhoto extends AppCompatActivity {
 
        // ProgressDialog progressDialog = new ProgressDialog(LocationPhoto.this);
 
+        button = (Button) findViewById(R.id.exit);
         refno = getIntent().getStringExtra("REFNO");
         address = getIntent().getStringExtra("ADDRESS");
         applcoappl = getIntent().getStringExtra("APPL");
@@ -86,7 +88,40 @@ public class LocationPhoto extends AppCompatActivity {
     }
 
 
+    public void exitfunc(View view) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,"http://139.59.5.200/repignite/android/updateallocations.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+//                progressDialog.show();
+                Map<String,String> params = new HashMap<String, String>();
+
+                params.put("REFNO",refno);
+                params.put("TYPE","");
+                params.put("APPLORCO",applcoappl);
+                return params;
+            }
+        };
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+
+        Intent intent = new Intent(LocationPhoto.this,AssignmentChoose.class);
+        startActivity(intent);
+    }
+
     public void onc(View view) {
+        button.setVisibility(View.VISIBLE);
         Intent cam_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(cam_intent,1);
     }

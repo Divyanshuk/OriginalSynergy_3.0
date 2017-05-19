@@ -46,10 +46,10 @@ import java.util.Map;
 
 public class Residence extends AppCompatActivity {
 
-    EditText name,noFamilyMem,workingMem,dependMem,children,twowheeler,fourwheeler,spouseEmp,registration,carpetArea,otherRemarks,mob,noyears,doba,eduqual;
+    EditText name,noFamilyMem,workingMem,dependMem,children,twowheeler,fourwheeler,spouseEmp,registration,carpetArea,otherRemarks,mob,noyears,doba;
     String sname,snoFamilyMem,sworkingMem,sdependMem,schildren,sspouseEmp,sresidence,smaritalStatus,slocality,sspousework;
-    Spinner residence,maritalStatus,locality,resambience,ncheck,clientcoop,spousework,addlock,relapp,recomm;
-    ArrayAdapter<CharSequence> residenceadapter,ambienceadapter;
+    Spinner residence,maritalStatus,locality,resambience,ncheck,clientcoop,spousework,addlock,relapp,recomm,eduqual;
+    ArrayAdapter<CharSequence> residenceadapter,ambienceadapter,educAdapter;
     ArrayAdapter<CharSequence> maritaladapter,ncheckadapter,recommadapter;
     ArrayAdapter<CharSequence> localityadapter,spouseworkadapter,clientcoopadapter,addlockadapter,relationadapter;
     LinearLayout linearLayout;
@@ -100,7 +100,7 @@ public class Residence extends AppCompatActivity {
         noyears = (EditText) findViewById(R.id.noyears);
         doba = (EditText) findViewById(R.id.dobapp);
         addlock = (Spinner) findViewById(R.id.add_check);
-        eduqual = (EditText) findViewById(R.id.eduqual);
+        eduqual = (Spinner) findViewById(R.id.eduqual);
         ncheck = (Spinner) findViewById(R.id.neighbour_check);
         clientcoop = (Spinner) findViewById(R.id.coopspinner);
         spousework = (Spinner)findViewById(R.id.SpouseWorkSpinner);
@@ -214,6 +214,9 @@ public class Residence extends AppCompatActivity {
         ambienceadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         resambience.setAdapter(ambienceadapter);
 
+        educAdapter = ArrayAdapter.createFromResource(this, R.array.edu, R.layout.support_simple_spinner_dropdown_item);
+        educAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        eduqual.setAdapter(educAdapter);
 
         recommadapter = ArrayAdapter.createFromResource(this, R.array.recom_or_not, R.layout.support_simple_spinner_dropdown_item);
         recommadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -364,7 +367,7 @@ public class Residence extends AppCompatActivity {
         smob = mob.getText().toString();
         snoyears = noyears.getText().toString();
         sdoba = doba.getText().toString();
-        seduqual = eduqual.getText().toString();
+        seduqual = eduqual.getSelectedItem().toString();
         saddlock = addlock.getSelectedItem().toString();
         final String sclientcoop = clientcoop.getSelectedItem().toString();
         final String stwo = twowheeler.getText().toString();

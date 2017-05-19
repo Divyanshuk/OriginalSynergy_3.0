@@ -22,7 +22,18 @@
             android:gravity="center"
             android:id="@+id/adres"
             />
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/darkblue"
+            android:onClick="exitfunc"
+            android:id="@+id/exit"
+            android:text="Exit"
+            android:visibility="gone"
+            android:textColor="#fff"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="200dp"
+            />
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
