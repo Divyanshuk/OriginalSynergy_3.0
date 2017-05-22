@@ -83,7 +83,7 @@ public class LocationPhoto extends AppCompatActivity {
         address = getIntent().getStringExtra("ADDRESS");
         applcoappl = getIntent().getStringExtra("APPL");
 
-       // progressDialog = new ProgressDialog(LocationPhoto.this);
+        progressDialog = new ProgressDialog(LocationPhoto.this);
 
     }
 
@@ -117,6 +117,7 @@ public class LocationPhoto extends AppCompatActivity {
 
 
         Intent intent = new Intent(LocationPhoto.this,AssignmentChoose.class);
+        intent.putExtra("Agent",AssignmentChoose.AgentID);
         startActivity(intent);
     }
 

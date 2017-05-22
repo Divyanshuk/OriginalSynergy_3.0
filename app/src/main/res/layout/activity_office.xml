@@ -457,7 +457,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@color/darkblue"
                     android:layout_gravity="center"
-                    android:text="FINISH"
+                    android:text="NEXT"
                     android:onClick="onClickNextso1"
                     android:textColor="#fff"
                     />

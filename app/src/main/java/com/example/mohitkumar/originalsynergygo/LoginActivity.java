@@ -47,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Log.d("TAG","In oncreate");
+
         agentId=(Spinner) findViewById(R.id.AgenitIspinner);
         pass=(EditText)findViewById(R.id.PasseditText);
 
@@ -65,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     try {
-                        Log.d("TAG",response);
+                        Log.d("TAG1",response);
                         JSONArray jsonArray = new JSONArray(response);
                         int count = 0;
                         while(count<jsonArray.length()){
@@ -86,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-//                        Log.d("passw",passw);
+                        //Log.d("passw",passw);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -122,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public boolean isNetworkAvailable(final Context context) {
+        Log.d("Inside","INIT");
         final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
         return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
@@ -157,50 +160,50 @@ public class LoginActivity extends AppCompatActivity {
 //        startActivity(intent);
     }
 
-    public void fetchDetails() {
-
-        final ArrayList<String> arrayList = new ArrayList<String>();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Log.d("TAG",response);
-                    JSONArray jsonArray = new JSONArray(response);
-                    int count = 0;
-                    while(count<jsonArray.length()){
-                        JSONObject jsonObject = jsonArray.getJSONObject(count);
-                        String name = jsonObject.getString("FOSNAME");
-                        arrayList.add(name);
-                        Log.d("NAMES",name);
-                    }
-
-                    String[] names = arrayList.toArray(new String[arrayList.size()]);
-                    agentAdapter = new ArrayAdapter<String>(LoginActivity.this,android.R.layout.simple_spinner_dropdown_item,names);
-                    agentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    agentId.setAdapter(agentAdapter);
-
-                    Log.d("passw",passw);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-
-                tablename = params.put("tablename","fosdetails");
-
-                return params;
-            }
-        };
-
-        MySingleton.getInstance(LoginActivity.this).addToRequestQueue(stringRequest);
-       // return arrayList;
-    }
+//    public void fetchDetails() {
+//
+//        final ArrayList<String> arrayList = new ArrayList<String>();
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    //Log.d("TAG",response);
+//                    JSONArray jsonArray = new JSONArray(response);
+//                    int count = 0;
+//                    while(count<jsonArray.length()){
+//                        JSONObject jsonObject = jsonArray.getJSONObject(count);
+//                        String name = jsonObject.getString("FOSNAME");
+//                        arrayList.add(name);
+//                        Log.d("NAMES",name);
+//                    }
+//
+//                    String[] names = arrayList.toArray(new String[arrayList.size()]);
+//                    agentAdapter = new ArrayAdapter<String>(LoginActivity.this,android.R.layout.simple_spinner_dropdown_item,names);
+//                    agentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    agentId.setAdapter(agentAdapter);
+//
+//                    Log.d("passw",passw);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        }) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//
+//                tablename = params.put("tablename","fosdetails");
+//
+//                return params;
+//            }
+//        };
+//
+//        MySingleton.getInstance(LoginActivity.this).addToRequestQueue(stringRequest);
+//       // return arrayList;
+//    }
 }

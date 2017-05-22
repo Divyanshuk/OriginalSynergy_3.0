@@ -170,7 +170,7 @@ public class Residence extends AppCompatActivity {
             }
         });
 
-        clientcoopadapter=ArrayAdapter.createFromResource(this,R.array.transfer,R.layout.support_simple_spinner_dropdown_item);
+        clientcoopadapter=ArrayAdapter.createFromResource(this,R.array.polite_rude,R.layout.support_simple_spinner_dropdown_item);
         clientcoopadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         clientcoop.setAdapter(clientcoopadapter);
 

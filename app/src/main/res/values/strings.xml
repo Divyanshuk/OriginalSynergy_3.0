@@ -103,6 +103,10 @@
         <item>YES</item>
         <item>NO</item>
     </string-array>
+    <string-array name="polite_rude">
+        <item>Polite</item>
+        <item>Rude</item>
+    </string-array>
     <string-array name="n_check">
         <item>POSITIVE</item>
         <item>NEGATIVE</item>

@@ -33,7 +33,7 @@ public class AssignmentChoose extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
     RecyclerView recyclerView;
-    String AgentID;
+    public static String AgentID;
     ArrayList<String> fi = new ArrayList<String>();
     ArrayList<CardDetails> list = new ArrayList<CardDetails>();
     public static final int EXTERNAL_STORAGE_CODE = 101;
