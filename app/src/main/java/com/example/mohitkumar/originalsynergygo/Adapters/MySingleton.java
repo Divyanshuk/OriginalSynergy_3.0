@@ -1,4 +1,4 @@
-package com.example.mohitkumar.originalsynergygo;
+package com.example.mohitkumar.originalsynergygo.Adapters;
 
 import android.content.Context;
 

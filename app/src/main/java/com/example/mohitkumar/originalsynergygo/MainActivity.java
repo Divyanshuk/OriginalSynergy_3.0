@@ -10,6 +10,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.mohitkumar.originalsynergygo.Activities.LoginActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final int EXTERNAL_STORAGE_CODE = 101;

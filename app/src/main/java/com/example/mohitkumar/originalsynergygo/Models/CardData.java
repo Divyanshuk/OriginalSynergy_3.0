@@ -1,4 +1,4 @@
-package com.example.mohitkumar.originalsynergygo;
+package com.example.mohitkumar.originalsynergygo.Models;
 
 /**
  * Created by mohitkumar on 11/04/17.

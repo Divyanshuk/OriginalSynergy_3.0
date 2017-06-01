@@ -29,12 +29,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".Residence" />
-        <activity android:name=".Business" />
-        <activity android:name=".Office" />
-        <activity android:name=".AssignmentChoose" />
-        <activity android:name=".LocationPhoto"></activity>
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.Residence" />
+        <activity android:name=".Activities.Business" />
+        <activity android:name=".Activities.Office" />
+        <activity android:name=".Activities.AssignmentChoose" />
+        <activity android:name=".Activities.LocationPhoto"></activity>
     </application>
 
 </manifest>

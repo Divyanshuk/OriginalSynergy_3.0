@@ -1,4 +1,4 @@
-package com.example.mohitkumar.originalsynergygo;
+package com.example.mohitkumar.originalsynergygo.Activities;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -35,10 +35,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.mohitkumar.originalsynergygo.Adapters.MySingleton;
+import com.example.mohitkumar.originalsynergygo.R;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -70,6 +71,7 @@ public class Business extends AppCompatActivity {
         filestr = getIntent().getExtras().getString("uniid");
 
         Log.d("TAG",applorcoappl);
+        Log.d("TAG56",filestr);
 
         name= (EditText)findViewById(R.id.nameeditText);
         nameboard = (Spinner)findViewById(R.id.nameboard);
@@ -454,7 +456,7 @@ public class Business extends AppCompatActivity {
                 params.put("RECOMM",srecomm);
                 params.put("SEENNOOFEMPL",sempsighted);
                 params.put("REMARKS",sremarks);
-                params.put("LATTITUDE",latt);
+                params.put("LATITUDE",latt);
                 params.put("LONGITUDE",longi);
                 return params;
             }

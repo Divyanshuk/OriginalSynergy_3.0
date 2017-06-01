@@ -1,4 +1,4 @@
-package com.example.mohitkumar.originalsynergygo;
+package com.example.mohitkumar.originalsynergygo.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -18,8 +17,9 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.example.mohitkumar.originalsynergygo.Adapters.MySingleton;
+import com.example.mohitkumar.originalsynergygo.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.example.mohitkumar.originalsynergygo;
+package com.example.mohitkumar.originalsynergygo.Activities;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -36,6 +36,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.mohitkumar.originalsynergygo.Adapters.MySingleton;
+import com.example.mohitkumar.originalsynergygo.R;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -47,7 +49,7 @@ import java.util.Map;
 public class Residence extends AppCompatActivity {
 
     EditText name,noFamilyMem,workingMem,dependMem,children,twowheeler,fourwheeler,spouseEmp,registration,carpetArea,otherRemarks,mob,noyears,doba;
-    String sname,snoFamilyMem,sworkingMem,sdependMem,schildren,sspouseEmp,sresidence,smaritalStatus,slocality,sspousework;
+    String sname,snoFamilyMem,sworkingMem,sdependMem,schildren,sspouseEmp,sresidence,smaritalStatus,slocality,sspousework,srecomm;
     Spinner residence,maritalStatus,locality,resambience,ncheck,clientcoop,spousework,addlock,relapp,recomm,eduqual;
     ArrayAdapter<CharSequence> residenceadapter,ambienceadapter,educAdapter;
     ArrayAdapter<CharSequence> maritaladapter,ncheckadapter,recommadapter;
@@ -369,12 +371,14 @@ public class Residence extends AppCompatActivity {
         sdoba = doba.getText().toString();
         seduqual = eduqual.getSelectedItem().toString();
         saddlock = addlock.getSelectedItem().toString();
+        srecomm = recomm.getSelectedItem().toString();
         final String sclientcoop = clientcoop.getSelectedItem().toString();
         final String stwo = twowheeler.getText().toString();
         final String sfour = fourwheeler.getText().toString();
         sspousework = spousework.getSelectedItem().toString();
         final String sambience = resambience.getSelectedItem().toString();
         final String latt = lat.getText().toString();
+        Log.d("LATTITUDE",latt);
         final String longi = lng.getText().toString();
 
         Calendar c = Calendar.getInstance();
@@ -400,6 +404,7 @@ public class Residence extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                // progressDialog.dismiss();
+                error.printStackTrace();
                 Toast.makeText(getApplicationContext(),"No connection",Toast.LENGTH_LONG).show();
             }
         }){
@@ -407,17 +412,20 @@ public class Residence extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String,String>();
 
+                Log.d("APPL",applorcoappl);
+                //Toast.makeText(getApplicationContext(),"Inside the post method",Toast.LENGTH_LONG).show();
+
                 if(applorcoappl.equals("APPLICANT")) {
                     params.put("tablename","appl_residence");
                 } else if(applorcoappl.equals("COAPPLICANT")){
                     params.put("tablename","coappl_residence");
                 }
 
+                params.put("REFNO",filestr);
                 params.put("DATEVISIT",date);
                 params.put("TIMEVISIT",time);
-                params.put("REFNO",filestr);
                 params.put("PERSONMET",sname);
-                params.put("RELATIOAPPL",srelapp);
+                params.put("RELATIONAPPL",srelapp);
                 params.put("PERSONPHONE",smob);
                 params.put("NOOFYEARS",snoyears);
                 params.put("DOBAPPL",sdoba);
@@ -431,7 +439,7 @@ public class Residence extends AppCompatActivity {
                 params.put("SPOUSEWORK",sspousework);
                 params.put("SPOUSEEMP",sspouseEmp);
                 params.put("COOPERATIVE",sclientcoop);
-                params.put("NEIGHBOURHOOD",saddlock);
+                params.put("NEIGHBORHOOD",saddlock);
                 params.put("LOCALITY",slocality);
                 params.put("AMBIENCE",sambience);
                 params.put("CARPETAREA",scarpetArea);
@@ -440,9 +448,10 @@ public class Residence extends AppCompatActivity {
                 params.put("WHEELER2",stwo);
                 params.put("WHEELER4",sfour);
 
-                params.put("LATTITUDE",latt);
+                params.put("LATITUDE",latt);
                 params.put("LONGITUDE",longi);
 
+                params.put("RECOMM",srecomm);
                 params.put("REMARKS",sotherRemarks);
 
                 return params;

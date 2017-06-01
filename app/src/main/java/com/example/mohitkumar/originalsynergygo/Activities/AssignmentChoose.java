@@ -1,4 +1,4 @@
-package com.example.mohitkumar.originalsynergygo;
+package com.example.mohitkumar.originalsynergygo.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -19,6 +19,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.mohitkumar.originalsynergygo.Models.CardDetails;
+import com.example.mohitkumar.originalsynergygo.Adapters.MySingleton;
+import com.example.mohitkumar.originalsynergygo.R;
+import com.example.mohitkumar.originalsynergygo.Adapters.RecyclerCardAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

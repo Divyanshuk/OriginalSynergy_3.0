@@ -1,4 +1,4 @@
-package com.example.mohitkumar.originalsynergygo;
+package com.example.mohitkumar.originalsynergygo.Models;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

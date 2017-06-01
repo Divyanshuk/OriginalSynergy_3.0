@@ -1,14 +1,18 @@
-package com.example.mohitkumar.originalsynergygo;
+package com.example.mohitkumar.originalsynergygo.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.mohitkumar.originalsynergygo.Activities.Business;
+import com.example.mohitkumar.originalsynergygo.Activities.Office;
+import com.example.mohitkumar.originalsynergygo.Models.CardDetails;
+import com.example.mohitkumar.originalsynergygo.R;
+import com.example.mohitkumar.originalsynergygo.Activities.Residence;
 
 import java.util.ArrayList;
 

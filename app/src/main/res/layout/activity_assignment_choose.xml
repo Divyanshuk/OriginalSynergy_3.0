@@ -6,7 +6,7 @@
     android:background="#f2f2f2"
     android:padding="3dp"
     android:layout_height="match_parent"
-    tools:context="com.example.mohitkumar.originalsynergygo.AssignmentChoose">
+    tools:context="com.example.mohitkumar.originalsynergygo.Activities.AssignmentChoose">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

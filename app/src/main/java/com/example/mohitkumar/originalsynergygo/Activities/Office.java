@@ -1,4 +1,4 @@
-package com.example.mohitkumar.originalsynergygo;
+package com.example.mohitkumar.originalsynergygo.Activities;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -35,6 +35,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.mohitkumar.originalsynergygo.Adapters.MySingleton;
+import com.example.mohitkumar.originalsynergygo.R;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -335,7 +337,7 @@ public class Office extends AppCompatActivity {
                 params.put("RECOMM",recom);
                 params.put("REMARKS",sremarks);
 
-                params.put("LATTITUDE",latt);
+                params.put("LATITUDE",latt);
                 params.put("LONGITUDE",longi);
 
                 params.put("DATEVISIT",date);
@@ -375,8 +377,8 @@ public class Office extends AppCompatActivity {
             longitude =location.getLongitude();
             if (latitude != 0 && longitude != 0){
 
-                lat.setText("Latitude is :" +location.getLatitude());
-                lng.setText("Longitude is :" +location.getLongitude());
+                lat.setText(""+location.getLatitude());
+                lng.setText("" +location.getLongitude());
 
                 dialog.dismiss();
             }
