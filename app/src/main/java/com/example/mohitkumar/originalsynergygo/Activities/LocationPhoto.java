@@ -96,7 +96,7 @@ public class LocationPhoto extends AppCompatActivity {
                 Map<String,String> params = new HashMap<String, String>();
 
                 params.put("REFNO",refno);
-                params.put("TYPE","");
+                params.put("TYPE",address);
                 params.put("APPLORCO",applcoappl);
                 return params;
             }
@@ -189,7 +189,7 @@ public class LocationPhoto extends AppCompatActivity {
 //                progressDialog.show();
                 Map<String,String> params = new HashMap<String, String>();
 
-                params.put("NAME","NIKHIL");
+                params.put("NAME",address + "_" + applcoappl);
                 params.put("IMAGE",getStringImage(bitmap));
 
                 return params;

@@ -393,20 +393,19 @@ public class Business extends AppCompatActivity {
         final String srecomm = recomm.getSelectedItem().toString();
         final String latt = lat.getText().toString();
         final String longi = lng.getText().toString();
-
+        Log.d("LONGITUDE",longi);
         Calendar c = Calendar.getInstance();
 
         int seconds = c.get(Calendar.SECOND);
         int minutes = c.get(Calendar.MINUTE);
-        int hour = c.get(Calendar.HOUR);
+        int hour = c.get(Calendar.HOUR_OF_DAY);
         final String time = hour+":"+minutes+":"+seconds;
 
 
         int day = c.get(Calendar.DAY_OF_MONTH);
         int month = c.get(Calendar.MONTH);
         int year = c.get(Calendar.YEAR);
-        final String date = day+"/"+month+"/"+year;
-
+        final String date = year+"/"+month+"/"+day;
 
         String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
 
@@ -419,6 +418,7 @@ public class Business extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // progressDialog.dismiss();
+                error.printStackTrace();
                 Toast.makeText(getApplicationContext(),"No connection",Toast.LENGTH_LONG).show();
             }
         }){
@@ -431,6 +431,8 @@ public class Business extends AppCompatActivity {
                 } else if(applorcoappl.equals("COAPPLICANT")){
                     params.put("tablename","coappl_business");
                 }
+
+                Log.d("IN HERE","Reached");
 
                 params.put("REFNO",filestr);
                 params.put("DATEVISIT",date);
@@ -456,6 +458,7 @@ public class Business extends AppCompatActivity {
                 params.put("RECOMM",srecomm);
                 params.put("SEENNOOFEMPL",sempsighted);
                 params.put("REMARKS",sremarks);
+                Log.d("LONG",longi);
                 params.put("LATITUDE",latt);
                 params.put("LONGITUDE",longi);
                 return params;
@@ -494,8 +497,8 @@ public class Business extends AppCompatActivity {
             longitude =location.getLongitude();
             if (latitude != 0 && longitude != 0){
 
-                lat.setText("Latitude is :" +location.getLatitude());
-                lng.setText("Longitude is :" +location.getLongitude());
+                lat.setText(""+location.getLatitude());
+                lng.setText(""+location.getLongitude());
 
                 dialog.dismiss();
             }

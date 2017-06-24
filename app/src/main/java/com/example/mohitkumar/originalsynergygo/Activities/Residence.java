@@ -378,21 +378,21 @@ public class Residence extends AppCompatActivity {
         sspousework = spousework.getSelectedItem().toString();
         final String sambience = resambience.getSelectedItem().toString();
         final String latt = lat.getText().toString();
-        Log.d("LATTITUDE",latt);
+        Log.d("LATITUDE",latt);
         final String longi = lng.getText().toString();
 
         Calendar c = Calendar.getInstance();
 
         int seconds = c.get(Calendar.SECOND);
         int minutes = c.get(Calendar.MINUTE);
-        int hour = c.get(Calendar.HOUR);
+        int hour = c.get(Calendar.HOUR_OF_DAY);
         final String time = hour+":"+minutes+":"+seconds;
 
 
         int day = c.get(Calendar.DAY_OF_MONTH);
         int month = c.get(Calendar.MONTH);
         int year = c.get(Calendar.YEAR);
-        final String date = day+"/"+month+"/"+year;
+        final String date = year+"/"+month+"/"+day;
 
         String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
@@ -447,7 +447,7 @@ public class Residence extends AppCompatActivity {
                 params.put("NNOOFFAMILY","");
                 params.put("WHEELER2",stwo);
                 params.put("WHEELER4",sfour);
-
+                Log.d("LATT",latt);
                 params.put("LATITUDE",latt);
                 params.put("LONGITUDE",longi);
 
@@ -489,12 +489,11 @@ public class Residence extends AppCompatActivity {
             longitude =location.getLongitude();
             if (latitude != 0 && longitude != 0){
 
-                lat.setText("Latitude is :" +location.getLatitude());
-                lng.setText("Longitude is :" +location.getLongitude());
+                lat.setText(""+location.getLatitude());
+                lng.setText(""+location.getLongitude());
 
                 dialog.dismiss();
             }
-
         }
 
         @Override

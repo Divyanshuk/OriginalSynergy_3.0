@@ -283,19 +283,20 @@ public class Office extends AppCompatActivity {
         final String recom = recomm.getSelectedItem().toString();
         final String latt = lat.getText().toString();
         final String longi = lng.getText().toString();
-
+        Log.d("LONGITUDE",longi);
         Calendar c = Calendar.getInstance();
 
         int seconds = c.get(Calendar.SECOND);
         int minutes = c.get(Calendar.MINUTE);
-        int hour = c.get(Calendar.HOUR);
+        int hour = c.get(Calendar.HOUR_OF_DAY);
         final String time = hour+":"+minutes+":"+seconds;
+
 
 
         int day = c.get(Calendar.DAY_OF_MONTH);
         int month = c.get(Calendar.MONTH);
         int year = c.get(Calendar.YEAR);
-        final String date = day+"/"+month+"/"+year;
+        final String date = year+"/"+month+"/"+day;
 
 
         String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
@@ -336,7 +337,7 @@ public class Office extends AppCompatActivity {
                 params.put("SALARYDESIGN","cool");
                 params.put("RECOMM",recom);
                 params.put("REMARKS",sremarks);
-
+                Log.d("LONG",longi);
                 params.put("LATITUDE",latt);
                 params.put("LONGITUDE",longi);
 

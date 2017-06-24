@@ -167,6 +167,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/dobapp"
                     android:inputType="datetime"
+                    android:hint="For eg : 02/09/1997"
                     android:layout_marginRight="30dp"
                     />
                 <LinearLayout
@@ -322,7 +323,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Number of dependent members"
+                    android:text="Dependent Adults"
                     android:textAppearance="?android:textAppearanceLarge"
                     />
                 <TextView
@@ -351,7 +352,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Number of children"
+                        android:text="Dependent children"
                         android:textAppearance="?android:textAppearanceLarge"
                         />
                     <TextView
@@ -568,6 +569,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
+                    android:hint="In meter square"
                     android:id="@+id/CarpetAreaeditText"
                     android:layout_marginRight="30dp"
                     />
@@ -654,12 +656,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="50dp"
                     android:id="@+id/fourwheelerseen"
-                    android:inputType="number"
+                    android:inputType="text"
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:layout_marginTop="20dp"
                     >
                     <TextView
@@ -683,6 +686,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/RegNoeditText"
                     android:inputType="number"
+                    android:visibility="gone"
                     android:layout_marginRight="30dp"
                     />
 
@@ -691,6 +695,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     >
                     <TextView
                         android:layout_width="wrap_content"
@@ -712,6 +717,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/PoliticaleditText"
+                    android:visibility="gone"
                     android:layout_marginRight="30dp"
                     android:inputType="textPersonName"
                     />

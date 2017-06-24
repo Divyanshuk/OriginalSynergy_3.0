@@ -123,10 +123,13 @@
         <item>SISTER</item>
         <item>HUSBAND</item>
         <item>WIFE</item>
+        <item>SELF</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="edu">
         <item>10th Pass Matriculate</item>
+        <item>12th Pass Matriculate</item>
         <item>Graduate</item>
         <item>Post Graduate</item>
     </string-array>
