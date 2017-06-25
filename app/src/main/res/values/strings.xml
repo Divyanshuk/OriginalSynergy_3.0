@@ -129,7 +129,7 @@
 
     <string-array name="edu">
         <item>10th Pass Matriculate</item>
-        <item>12th Pass Matriculate</item>
+        <item>12th Pass Intermediate</item>
         <item>Graduate</item>
         <item>Post Graduate</item>
     </string-array>

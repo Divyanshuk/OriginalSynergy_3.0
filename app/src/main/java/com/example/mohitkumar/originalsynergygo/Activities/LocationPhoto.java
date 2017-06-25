@@ -133,41 +133,6 @@ public class LocationPhoto extends AppCompatActivity {
     }
 
     private void uploadImage(){
-//        class UploadImage extends AsyncTask<Bitmap,Void,String> {
-//
-//            ProgressDialog loading;
-//            Requesthandler rh = new Requesthandler();
-//
-//            @Override
-//            protected void onPreExecute() {
-//                super.onPreExecute();
-//                loading = ProgressDialog.show(LocationPhoto.this, "Uploading Image", "Please wait...",true,true);
-//            }
-//
-//            @Override
-//            protected void onPostExecute(String s) {
-//                super.onPostExecute(s);
-//                loading.dismiss();
-//                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            protected String doInBackground(Bitmap... params) {
-//                Bitmap bitmap = params[0];
-//                String uploadImage = getStringImage(bitmap);
-//
-//                HashMap<String,String> data = new HashMap<>();
-//                data.put(UPLOAD_KEY, uploadImage);
-//
-//                String result = rh.sendPostRequest(UPLOAD_URL,data);
-//
-//                return result;
-//            }
-//        }
-//
-//        UploadImage ui = new UploadImage();
-//        ui.execute(bitmap);
-
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Uploading Image");
         progressDialog.show();
@@ -189,6 +154,7 @@ public class LocationPhoto extends AppCompatActivity {
 //                progressDialog.show();
                 Map<String,String> params = new HashMap<String, String>();
 
+                params.put("REFNO",refno);
                 params.put("NAME",address + "_" + applcoappl);
                 params.put("IMAGE",getStringImage(bitmap));
 
@@ -196,35 +162,6 @@ public class LocationPhoto extends AppCompatActivity {
             }
         };
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
-
-        String server_url = "";
-
-        StringRequest stringRequest1 = new StringRequest(Request.Method.POST, UPLOAD_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-//                progressDialog.show();
-                Map<String,String> params = new HashMap<String, String>();
-
-                params.put("LATTITUDE",lat.getText().toString());
-                params.put("LONGITUDE",lng.getText().toString());
-
-                return params;
-            }
-        };
-        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest1);
-
-
         progressDialog.dismiss();
     }
 

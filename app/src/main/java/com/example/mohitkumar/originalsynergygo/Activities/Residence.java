@@ -48,8 +48,8 @@ import java.util.Map;
 
 public class Residence extends AppCompatActivity {
 
-    EditText name,noFamilyMem,workingMem,dependMem,children,twowheeler,fourwheeler,spouseEmp,registration,carpetArea,otherRemarks,mob,noyears,doba;
-    String sname,snoFamilyMem,sworkingMem,sdependMem,schildren,sspouseEmp,sresidence,smaritalStatus,slocality,sspousework,srecomm;
+    EditText name,noFamilyMem,workingMem,dependMem,children,twowheeler,fourwheeler,spouseEmp,registration,carpetArea,otherRemarks,mob,noyears,doba,nnoff;
+    String sname,snoFamilyMem,sworkingMem,sdependMem,schildren,sspouseEmp,sresidence,smaritalStatus,slocality,sspousework,srecomm,snnoff;
     Spinner residence,maritalStatus,locality,resambience,ncheck,clientcoop,spousework,addlock,relapp,recomm,eduqual;
     ArrayAdapter<CharSequence> residenceadapter,ambienceadapter,educAdapter;
     ArrayAdapter<CharSequence> maritaladapter,ncheckadapter,recommadapter;
@@ -105,6 +105,7 @@ public class Residence extends AppCompatActivity {
         eduqual = (Spinner) findViewById(R.id.eduqual);
         ncheck = (Spinner) findViewById(R.id.neighbour_check);
         clientcoop = (Spinner) findViewById(R.id.coopspinner);
+        nnoff = (EditText) findViewById(R.id.snnoffam);
         spousework = (Spinner)findViewById(R.id.SpouseWorkSpinner);
 
         residenceadapter=ArrayAdapter.createFromResource(this,R.array.resstatus,R.layout.support_simple_spinner_dropdown_item);
@@ -372,6 +373,8 @@ public class Residence extends AppCompatActivity {
         seduqual = eduqual.getSelectedItem().toString();
         saddlock = addlock.getSelectedItem().toString();
         srecomm = recomm.getSelectedItem().toString();
+        snnoff = nnoff.getText().toString();
+        final String sncheck =ncheck.getSelectedItem().toString();
         final String sclientcoop = clientcoop.getSelectedItem().toString();
         final String stwo = twowheeler.getText().toString();
         final String sfour = fourwheeler.getText().toString();
@@ -390,9 +393,11 @@ public class Residence extends AppCompatActivity {
 
 
         int day = c.get(Calendar.DAY_OF_MONTH);
-        int month = c.get(Calendar.MONTH);
+        int month = c.get(Calendar.MONTH) + 1;
         int year = c.get(Calendar.YEAR);
         final String date = year+"/"+month+"/"+day;
+
+        Log.d("DATE",date);
 
         String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
@@ -439,12 +444,12 @@ public class Residence extends AppCompatActivity {
                 params.put("SPOUSEWORK",sspousework);
                 params.put("SPOUSEEMP",sspouseEmp);
                 params.put("COOPERATIVE",sclientcoop);
-                params.put("NEIGHBORHOOD",saddlock);
+                params.put("NEIGHBORHOOD",sncheck);
                 params.put("LOCALITY",slocality);
                 params.put("AMBIENCE",sambience);
                 params.put("CARPETAREA",scarpetArea);
-                params.put("NAPPLSTAY","");
-                params.put("NNOOFFAMILY","");
+                params.put("NAPPLSTAY",saddlock);
+                params.put("NNOOFFAMILY",snnoff);
                 params.put("WHEELER2",stwo);
                 params.put("WHEELER4",sfour);
                 Log.d("LATT",latt);

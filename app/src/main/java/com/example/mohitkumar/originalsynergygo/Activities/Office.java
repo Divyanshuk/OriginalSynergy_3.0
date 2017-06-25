@@ -50,8 +50,20 @@ public class Office extends AppCompatActivity {
 
 
     EditText name,designation,mobile,joinDate,desigApp,noYears,companyNature,remarks,detsalary,orgname;
-    String sname,sdesignation,smobile,sjoinDate,sdesigApp,snoYears,scompanyNature,sremarks,sjobType,sworkOrg,sjobTransfer,sdetsalary;
-    String filestr,agentid,applorcoappl;
+    String sname;
+    String sdesignation;
+    String smobile;
+    String sjoinDate;
+    String sdesigApp;
+    String snoYears;
+    String scompanyNature;
+    String sremarks;
+    String sjobType;
+    String sworkOrg;
+    String sjobTransfer;
+    String sdetsalary;
+    EditText detvarsal;
+    String filestr,sdetvarsal,applorcoappl;
     ProgressDialog dialog;
     Button refresh;
     private double latitude = 0;
@@ -84,6 +96,7 @@ public class Office extends AppCompatActivity {
         workOrg=(Spinner)findViewById(R.id.workingAsspinner);
         jobTransfer=(Spinner)findViewById(R.id.transferspinner);
         detsalary = (EditText)findViewById(R.id.det_ver);
+        detvarsal = (EditText) findViewById(R.id.desig_ver);
         orgname = (EditText) findViewById(R.id.nameoforganisation);
         recomm = (Spinner)findViewById(R.id.recomm);
 
@@ -214,13 +227,6 @@ public class Office extends AppCompatActivity {
                     dialog.setMessage("Getting Your location....");
                     dialog.show();
                     if (ActivityCompat.checkSelfPermission(Office.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Office.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
                         return;
                     }
                     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 100, locationListener);
@@ -229,13 +235,6 @@ public class Office extends AppCompatActivity {
                 } else {
                     Log.d("THIS","HERE 2");
                     if (ActivityCompat.checkSelfPermission(Office.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Office.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
                         return;
                     }
                     AlertDialog.Builder builder =
@@ -279,6 +278,7 @@ public class Office extends AppCompatActivity {
         scompanyNature=companyNature.getText().toString().trim();
         sremarks=remarks.getText().toString().trim();
         sdetsalary = detsalary.getText().toString().trim();
+        sdetvarsal = detvarsal.getText().toString().trim();
         final String sorgname = orgname.getText().toString();
         final String recom = recomm.getSelectedItem().toString();
         final String latt = lat.getText().toString();
@@ -294,10 +294,11 @@ public class Office extends AppCompatActivity {
 
 
         int day = c.get(Calendar.DAY_OF_MONTH);
-        int month = c.get(Calendar.MONTH);
+        int month = c.get(Calendar.MONTH) + 1;
         int year = c.get(Calendar.YEAR);
         final String date = year+"/"+month+"/"+day;
 
+        Log.d("DATE",date);
 
         String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
@@ -334,7 +335,7 @@ public class Office extends AppCompatActivity {
                 params.put("WORKINGAS",sworkOrg);
                 params.put("TRANSFERABLE",sjobTransfer);
                 params.put("SALARYPERSON",sdetsalary);
-                params.put("SALARYDESIGN","cool");
+                params.put("SALARYDESIGN",sdetvarsal);
                 params.put("RECOMM",recom);
                 params.put("REMARKS",sremarks);
                 Log.d("LONG",longi);
@@ -352,7 +353,7 @@ public class Office extends AppCompatActivity {
 
         Intent intent = new Intent(Office.this,LocationPhoto.class);
         intent.putExtra("REFNO",filestr);
-        intent.putExtra("ADDRESS","SERVICE");
+        intent.putExtra("ADDRESS","EMPLOYMENT");
         intent.putExtra("APPL",applorcoappl);
         startActivity(intent);
     }

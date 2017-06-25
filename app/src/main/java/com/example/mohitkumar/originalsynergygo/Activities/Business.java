@@ -238,29 +238,6 @@ public class Business extends AppCompatActivity {
         locateadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         locate.setAdapter(bactadapter);
 
-        locate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                switch (i) {
-                    case 0:
-                        slocate = "HIGH";
-                        break;
-                    case 1:
-                        slocate = "MEDIUM";
-                        break;
-                    case 2:
-                        slocate = "LOW";
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
         polaffladapter = ArrayAdapter.createFromResource(this, R.array.aff_pol_party, R.layout.support_simple_spinner_dropdown_item);
         polaffladapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         polaffl.setAdapter(polaffladapter);
@@ -403,9 +380,10 @@ public class Business extends AppCompatActivity {
 
 
         int day = c.get(Calendar.DAY_OF_MONTH);
-        int month = c.get(Calendar.MONTH);
+        int month = c.get(Calendar.MONTH)+1;
         int year = c.get(Calendar.YEAR);
         final String date = year+"/"+month+"/"+day;
+        Log.d("DATE",date);
 
         String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
 
@@ -434,12 +412,14 @@ public class Business extends AppCompatActivity {
 
                 Log.d("IN HERE","Reached");
 
+                Log.d("REFNO",filestr);
+
                 params.put("REFNO",filestr);
                 params.put("DATEVISIT",date);
                 params.put("TIMEVISIT",time);
                 params.put("PERSONMET",sname);
-                params.put("DESIGNAPPL",sdesig);
-                params.put("PERSONDESIGN",spdesig);
+                params.put("DESIGNAPPL",spdesig);
+                params.put("PERSONDESIGN",sdesig);
                 params.put("PERSONPHONE",scontact);
                 params.put("NOOFYEARS",sYearCompany);
                 params.put("VISITCARD",svcard);

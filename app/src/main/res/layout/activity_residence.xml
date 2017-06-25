@@ -167,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/dobapp"
                     android:inputType="datetime"
-                    android:hint="For eg : 02/09/1997"
+                    android:hint="For eg : 1997/09/02"
                     android:layout_marginRight="30dp"
                     />
                 <LinearLayout
@@ -313,7 +313,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/workingmemeditText"
                     android:layout_marginRight="30dp"
-                    /><LinearLayout
+                    />
+                <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -417,7 +418,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(Only if married)"
+                        android:text="(Only employed)"
                         android:layout_weight="1"
                         />
                 </LinearLayout>
@@ -600,6 +601,26 @@
                     android:layout_marginRight="50dp"
                     android:id="@+id/add_check"
                     ></Spinner>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="If address locked, No. of applicant at address?"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        />
+                </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/snnoffam"
+                    android:inputType="number"
+                    android:layout_marginRight="30dp"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
