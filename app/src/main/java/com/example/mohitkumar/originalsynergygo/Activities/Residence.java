@@ -465,6 +465,7 @@ public class Residence extends AppCompatActivity {
 
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
+        Log.d("REFNO",filestr);
         Intent intent = new Intent(Residence.this,LocationPhoto.class);
         intent.putExtra("REFNO",filestr);
         intent.putExtra("ADDRESS","RESIDENCE");

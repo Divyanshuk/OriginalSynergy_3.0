@@ -238,7 +238,29 @@ public class Business extends AppCompatActivity {
         locateadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         locate.setAdapter(bactadapter);
 
-        polaffladapter = ArrayAdapter.createFromResource(this, R.array.aff_pol_party, R.layout.support_simple_spinner_dropdown_item);
+        locate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                             @Override
+                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                                                 switch (i) {
+                                                     case 0:
+                                                         slocate = "YES";
+                                                         break;
+                                                     case 1:
+                                                         slocate = "NO";
+                                                         break;
+                                                 }
+
+
+                                             }
+
+                                             @Override
+                                             public void onNothingSelected(AdapterView<?> parent) {
+
+                                             }
+                                         });
+
+            polaffladapter = ArrayAdapter.createFromResource(this, R.array.aff_pol_party, R.layout.support_simple_spinner_dropdown_item);
         polaffladapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         polaffl.setAdapter(polaffladapter);
 
@@ -449,6 +471,7 @@ public class Business extends AppCompatActivity {
 
         progressDialog.dismiss();
 
+        Log.d("REFNO",filestr);
         Intent intent = new Intent(Business.this,LocationPhoto.class);
         intent.putExtra("REFNO",filestr);
         intent.putExtra("ADDRESS","BUSINESS");

@@ -154,6 +154,7 @@ public class LocationPhoto extends AppCompatActivity {
 //                progressDialog.show();
                 Map<String,String> params = new HashMap<String, String>();
 
+                Log.d("NAME",address + "_" + applcoappl);
                 params.put("REFNO",refno);
                 params.put("NAME",address + "_" + applcoappl);
                 params.put("IMAGE",getStringImage(bitmap));
