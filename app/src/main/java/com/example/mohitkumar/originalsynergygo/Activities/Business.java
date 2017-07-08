@@ -236,7 +236,7 @@ public class Business extends AppCompatActivity {
 
         locateadapter = ArrayAdapter.createFromResource(this, R.array.easy_locate, R.layout.support_simple_spinner_dropdown_item);
         locateadapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        locate.setAdapter(bactadapter);
+        locate.setAdapter(locateadapter);
 
         locate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                              @Override
@@ -407,7 +407,7 @@ public class Business extends AppCompatActivity {
         final String date = year+"/"+month+"/"+day;
         Log.d("DATE",date);
 
-        String server_url = "http://139.59.5.200/repignite/android/addtotable.php";
+        String server_url = "http://139.59.59.186/repignite/android/addtotable.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
             @Override

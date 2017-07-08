@@ -51,9 +51,9 @@ public class LocationPhoto extends AppCompatActivity {
     Button button;
     private int PICK_IMAGE_REQUEST = 1;
 
-    public static final String UPLOAD_URL = "http://139.59.5.200/repignite/android/imageupload.php";
+    public static final String UPLOAD_URL = "http://139.59.59.186/repignite/android/imageupload.php";
     public static final String UPLOAD_KEY = "image";
-    public static final String TAG = "MY MESSAGE";
+    public static final String TAG = "LOCATIONCLASS";
 
     public static final int LOCATION_REQ_CODE = 100;
     public static final int EXTERNAL_STORAGE_CODE = 101;
@@ -65,6 +65,8 @@ public class LocationPhoto extends AppCompatActivity {
 
 
        // ProgressDialog progressDialog = new ProgressDialog(LocationPhoto.this);
+
+        Log.d("TAG 1 ", "onCreate: inside oncreate");
 
         button = (Button) findViewById(R.id.exit);
         refno = getIntent().getStringExtra("REFNO");
@@ -78,7 +80,7 @@ public class LocationPhoto extends AppCompatActivity {
 
     public void exitfunc(View view) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,"http://139.59.5.200/repignite/android/updateallocations.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,"http://139.59.59.186/repignite/android/updateallocations.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -112,6 +114,7 @@ public class LocationPhoto extends AppCompatActivity {
     public void onc(View view) {
         button.setVisibility(View.VISIBLE);
         Intent cam_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Log.d(TAG, "onc: inside ONC");
         startActivityForResult(cam_intent,1);
     }
 
@@ -120,12 +123,14 @@ public class LocationPhoto extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
+            Log.d(TAG, "onActivityResult: inside the pickimagerequest");
             filepath = data.getData();
             try {
+                Log.d(TAG, "onActivityResult: filepath is here");
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filepath);
                 uploadImage();
             } catch (IOException e) {
+                Log.d(TAG,"Inside this part");
                 e.printStackTrace();
             }
         }
@@ -168,11 +173,12 @@ public class LocationPhoto extends AppCompatActivity {
 
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Log.d("COMPRESS","COmpressing");
+        Log.d(TAG,"Compressing");
     //    progressDialog.show();
         bmp.compress(Bitmap.CompressFormat.JPEG,20, baos);
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        Log.d(TAG,encodedImage);
         return encodedImage;
     }
 

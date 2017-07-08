@@ -41,7 +41,7 @@ public class AssignmentChoose extends AppCompatActivity {
     ArrayList<String> fi = new ArrayList<String>();
     ArrayList<CardDetails> list = new ArrayList<CardDetails>();
     public static final int EXTERNAL_STORAGE_CODE = 101;
-    String json_url = "http://139.59.5.200/repignite/android/fetchallocations.php";
+    String json_url = "http://139.59.59.186/repignite/android/fetchallocations.php";
 
 
     @Override
