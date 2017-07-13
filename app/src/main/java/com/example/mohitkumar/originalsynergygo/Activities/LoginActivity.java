@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     EditText pass;
-    String server_url = "http://139.59.59.186/repignite/android/fetchtable.php";
+    String server_url = "http://aztek.in/repignite/android/fetchtable.php";
     Spinner agentId;
     ArrayAdapter<String> agentAdapter;
     String id,passw,tablename;

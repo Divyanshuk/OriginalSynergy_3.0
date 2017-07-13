@@ -407,7 +407,7 @@ public class Business extends AppCompatActivity {
         final String date = year+"/"+month+"/"+day;
         Log.d("DATE",date);
 
-        String server_url = "http://139.59.59.186/repignite/android/addtotable.php";
+        String server_url = "http://aztek.in/repignite/android/addtotable.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
             @Override

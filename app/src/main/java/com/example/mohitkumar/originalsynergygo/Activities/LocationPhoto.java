@@ -65,7 +65,7 @@ public class LocationPhoto extends AppCompatActivity {
     File destination;
     private int PICK_IMAGE_REQUEST = 1;
 
-    public static final String UPLOAD_URL = "http://139.59.59.186/repignite/android/imageupload.php";
+    public static final String UPLOAD_URL = "http://aztek.in/repignite/android/imageupload.php";
     public static final String UPLOAD_KEY = "image";
     public static final String TAG = "LOCATIONCLASS";
 
@@ -95,7 +95,7 @@ public class LocationPhoto extends AppCompatActivity {
 
     public void exitfunc(View view) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,"http://139.59.59.186/repignite/android/updateallocations.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,"http://aztek.in/repignite/android/updateallocations.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
