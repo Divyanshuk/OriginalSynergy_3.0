@@ -47,7 +47,7 @@
     </string-array>
 
     <string-array name="workorg">
-        <item> "Typist"</item>
+        <item>"TYPIST"</item>
         <item>"STENOGRAPHER"</item>
         <item>"SUPERVISOR"</item>
         <item>"JUNIOR MANAGEMENT"</item>
