@@ -321,7 +321,10 @@ public class Office extends AppCompatActivity {
                     params.put("tablename","appl_employment");
                 } else if(applorcoappl.equals("COAPPLICANT")){
                     params.put("tablename","coappl_employment");
+                } else if(applorcoappl.equals("COAPPLICANT2")){
+                    params.put("tablename","coappl2_employment");
                 }
+              
 
                 params.put("REFNO",filestr);
                 params.put("PERSONMET",sname);
