@@ -430,6 +430,8 @@ public class Business extends AppCompatActivity {
                     params.put("tablename","appl_business");
                 } else if(applorcoappl.equals("COAPPLICANT")){
                     params.put("tablename","coappl_business");
+                } else if(applorcoappl.equals("COAPPLICANT2")){
+                    params.put("tablename","coappl2_business");
                 }
 
                 Log.d("IN HERE","Reached");
