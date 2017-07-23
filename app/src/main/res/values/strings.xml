@@ -2,70 +2,70 @@
     <string name="app_name">OriginalSynergyGo</string>
 
     <string-array name="resstatus">
-        <item>Self Owned</item>
-        <item>Owned By Relatives</item>
-        <item>Rented</item>
-        <item>Paying Guest</item>
-        <item>Owned by Parents</item>
-        <item>Owned by Friends</item>
-        <item>Company Accommodation</item>
+        <item>SELF OWNED</item>
+        <item>OWNED BY RELATIVES</item>
+        <item>RENTED</item>
+        <item>PAYING GUEST</item>
+        <item>OWNED BY PARENTS</item>
+        <item>OWNED BY FRIENDS</item>
+        <item>COMPANY ACCOMMODATION</item>
     </string-array>
 
     <string-array name="vehicle">
-        <item>Two Wheeler</item>
-        <item>Car</item>
+        <item>TWO WHEELER</item>
+        <item>FOUR WHEELER</item>
         <item>Other</item>
     </string-array>
 
 
     <string-array name="marital">
-        <item>Single</item>
-        <item>Married</item>
+        <item>SINGLE</item>
+        <item>MARRIED</item>
 
     </string-array>
 
     <string-array name="company">
         <item>PUBLIC LIMITED</item>
+        <item>PRIVATE LIMITED</item>
         <item>PARTNERSHIP</item>
-        <item>PRIVATE LTD.</item>
         <item>PROPRIETORSHIP</item>
         <item>OTHER</item>
     </string-array>
     <string-array name="transfer">
-        <item>Yes</item>
-        <item>No</item>
+        <item>YES</item>
+        <item>NO</item>
 
     </string-array>
 
 
     <string-array name="jobtype">
-        <item>" Permanent"</item>
-        <item>"Probation"</item>
-        <item>"Contract Worker"</item>
-        <item>"Temporary Worker"</item>
-        <item>"Others"</item>
+        <item>"PERMANENT"</item>
+        <item>"PROBATION"</item>
+        <item>"CONTRACT WORKER"</item>
+        <item>"TEMPORARY WORKER"</item>
+        <item>"OTHERS"</item>
     </string-array>
 
     <string-array name="workorg">
-        <item> "Typist"</item>
-        <item>"Stenographer"</item>
-        <item>"Supervisor"</item>
-        <item>"Junior Management"</item>
-        <item>"Middle Management"</item>
-        <item>"Senior Management"</item>
-        <item>"Other Management"</item>
+        <item>"TYPIST"</item>
+        <item>"STENOGRAPHER"</item>
+        <item>"SUPERVISOR"</item>
+        <item>"JUNIOR MANAGEMENT"</item>
+        <item>"MIDDLE MANAGEMENT"</item>
+        <item>"SENIOR MANAGEMENT"</item>
+        <item>"OTHER MANAGEMENT"</item>
     </string-array>
 
     <string-array name="locality">
-        <item>Posh Locality</item>
-        <item>Village Area</item>
-        <item>Lodging</item>
-        <item>Upper Middle Class</item>
-        <item>Lower Middle Class</item>
-        <item>Slum Locality</item>
-        <item>Middle Class</item>
-        <item>Residential Complex</item>
-        <item>Others</item>
+        <item>POSH LOCALITY</item>
+        <item>VILLAGE AREA</item>
+        <item>LODGING</item>
+        <item>UPPER MIDDLE CLASS</item>
+        <item>LOWER MIDDLE CLASS</item>
+        <item>SLUM LOCALITY</item>
+        <item>MIDDLE CLASS</item>
+        <item>RESIDENTIAL COMPLEX</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="name_board">
@@ -104,8 +104,8 @@
         <item>NO</item>
     </string-array>
     <string-array name="polite_rude">
-        <item>Polite</item>
-        <item>Rude</item>
+        <item>POLITE</item>
+        <item>RUDE</item>
     </string-array>
     <string-array name="n_check">
         <item>POSITIVE</item>
@@ -128,9 +128,9 @@
     </string-array>
 
     <string-array name="edu">
-        <item>10th Pass Matriculate</item>
-        <item>12th Pass Intermediate</item>
-        <item>Graduate</item>
-        <item>Post Graduate</item>
+        <item>10TH PASS</item>
+        <item>12TH PASS</item>
+        <item>GRADUATE</item>
+        <item>POST GRADUATE</item>
     </string-array>
 </resources>
