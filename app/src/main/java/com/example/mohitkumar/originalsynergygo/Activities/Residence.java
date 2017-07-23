@@ -424,6 +424,8 @@ public class Residence extends AppCompatActivity {
                     params.put("tablename","appl_residence");
                 } else if(applorcoappl.equals("COAPPLICANT")){
                     params.put("tablename","coappl_residence");
+                } else if(applorcoappl.equals("COAPPLICANT2")){
+                    params.put("tablename","coappl2_residence");
                 }
 
                 params.put("REFNO",filestr);
